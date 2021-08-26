@@ -1,0 +1,12 @@
+/storage/emulated/0/.sketchware/mysc/956/gen/smartvoice/my/amirali/R.java \
+/storage/emulated/0/.sketchware/mysc/956/gen/androidx/appcompat/R.java \
+/storage/emulated/0/.sketchware/mysc/956/gen/androidx/core/R.java \
+/storage/emulated/0/.sketchware/mysc/956/gen/androidx/appcompat/resources/R.java \
+/storage/emulated/0/.sketchware/mysc/956/gen/androidx/coordinatorlayout/R.java \
+/storage/emulated/0/.sketchware/mysc/956/gen/com/google/android/material/R.java \
+/storage/emulated/0/.sketchware/mysc/956/gen/androidx/transition/R.java \
+/storage/emulated/0/.sketchware/mysc/956/gen/androidx/cardview/R.java \
+/storage/emulated/0/.sketchware/mysc/956/gen/androidx/recyclerview/R.java \
+/storage/emulated/0/.sketchware/mysc/956/gen/com/bumptech/glide/R.java \
+/storage/emulated/0/.sketchware/mysc/956/gen/de/hdodenhof/circleimageview/R.java \
+/storage/emulated/0/.sketchware/mysc/956/gen/com/zolad/zoominimageview/R.java \
