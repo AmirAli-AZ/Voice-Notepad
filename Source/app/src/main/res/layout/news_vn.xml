@@ -50,7 +50,8 @@
 				android:padding="8dp"
 				android:dividerHeight="0dp"
 				android:divider="@null"
-				android:choiceMode="none"/>
+				android:choiceMode="none"
+				android:overScrollMode="never"/>
 		</LinearLayout>
 	</LinearLayout>
 </LinearLayout>

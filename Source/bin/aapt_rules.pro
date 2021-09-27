@@ -82,12 +82,14 @@
 -keep class androidx.coordinatorlayout.widget.CoordinatorLayout { <init>(...); }
 
 # view res/layout/abc_alert_dialog_material.xml #generated:41
+# view res/layout/tts_settings.xml #generated:8
+# view res/layout/voice.xml #generated:93
 -keep class androidx.core.widget.NestedScrollView { <init>(...); }
 
 # view res/layout/create.xml #generated:1
 -keep class androidx.drawerlayout.widget.DrawerLayout { <init>(...); }
 
-# view res/layout/backup.xml #generated:40
+# view res/layout/backup.xml #generated:48
 # view res/layout/create.xml #generated:72
 -keep class androidx.swiperefreshlayout.widget.SwipeRefreshLayout { <init>(...); }
 
@@ -120,56 +122,63 @@
 -keep class com.google.android.material.snackbar.SnackbarContentLayout { <init>(...); }
 
 # view res/layout/credits.xml #generated:129
-# view res/layout/credits.xml #generated:176
 # view res/layout/credits.xml #generated:83
 -keep class de.hdodenhof.circleimageview.CircleImageView { <init>(...); }
 
-# view AndroidManifest.xml #generated:96
+# view AndroidManifest.xml #generated:99
 -keep class smartvoice.my.amirali.BackupActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:91
+# view AndroidManifest.xml #generated:94
 -keep class smartvoice.my.amirali.CodeEditorActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:101
+# view AndroidManifest.xml #generated:104
 -keep class smartvoice.my.amirali.CopyFileActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:34
 -keep class smartvoice.my.amirali.CreateActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:64
+# view AndroidManifest.xml #generated:67
 -keep class smartvoice.my.amirali.CreditsActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:107
-# view AndroidManifest.xml #generated:80
+# view AndroidManifest.xml #generated:120
+# view AndroidManifest.xml #generated:83
 -keep class smartvoice.my.amirali.DebugActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:75
+# view AndroidManifest.xml #generated:78
 -keep class smartvoice.my.amirali.HelpActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:44
+# view AndroidManifest.xml #generated:47
 -keep class smartvoice.my.amirali.InfoActivity { <init>(...); }
 
+# view AndroidManifest.xml #generated:142
 # view AndroidManifest.xml #generated:23
 -keep class smartvoice.my.amirali.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:114
+# view AndroidManifest.xml #generated:127
 -keep class smartvoice.my.amirali.MyWidget { <init>(...); }
 
-# view AndroidManifest.xml #generated:85
+# view AndroidManifest.xml #generated:88
 -keep class smartvoice.my.amirali.NewsVnActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:58
+# view AndroidManifest.xml #generated:61
 -keep class smartvoice.my.amirali.SettingsActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:15
 -keep class smartvoice.my.amirali.SketchApplication { <init>(...); }
 
-# view AndroidManifest.xml #generated:70
+# view AndroidManifest.xml #generated:110
+-keep class smartvoice.my.amirali.TextviewerActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:73
 -keep class smartvoice.my.amirali.TtsSettingsActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:39
 -keep class smartvoice.my.amirali.VoiceActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:51
+# view AndroidManifest.xml #generated:54
 -keep class smartvoice.my.amirali.WelcomeActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:115
+# view AndroidManifest.xml #generated:136
+-keep class smartvoice.my.amirali.WidgetconfigActivity { <init>(...); }
 

@@ -25,8 +25,8 @@ import java.text.*;
 import org.json.*;
 import android.widget.ScrollView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.CheckBox;
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -59,10 +59,11 @@ public class SettingsActivity extends  AppCompatActivity  {
 	private LinearLayout linear16;
 	private LinearLayout linear17;
 	private LinearLayout linear21;
+	private ImageView imageview1;
 	private TextView textview1;
 	private LinearLayout linear24;
-	private TextView textview14;
 	private ImageView imageview9;
+	private TextView textview14;
 	private TextView textview8;
 	private LinearLayout linear12;
 	private LinearLayout linear13;
@@ -73,11 +74,11 @@ public class SettingsActivity extends  AppCompatActivity  {
 	private CheckBox checkbox2;
 	private TextView textview9;
 	private LinearLayout linear18;
-	private TextView textview10;
 	private ImageView imageview6;
+	private TextView textview10;
 	private LinearLayout linear22;
-	private TextView textview13;
 	private ImageView imageview8;
+	private TextView textview13;
 	
 	private SharedPreferences settings;
 	private SharedPreferences line;
@@ -105,10 +106,11 @@ public class SettingsActivity extends  AppCompatActivity  {
 		linear16 = (LinearLayout) findViewById(R.id.linear16);
 		linear17 = (LinearLayout) findViewById(R.id.linear17);
 		linear21 = (LinearLayout) findViewById(R.id.linear21);
+		imageview1 = (ImageView) findViewById(R.id.imageview1);
 		textview1 = (TextView) findViewById(R.id.textview1);
 		linear24 = (LinearLayout) findViewById(R.id.linear24);
-		textview14 = (TextView) findViewById(R.id.textview14);
 		imageview9 = (ImageView) findViewById(R.id.imageview9);
+		textview14 = (TextView) findViewById(R.id.textview14);
 		textview8 = (TextView) findViewById(R.id.textview8);
 		linear12 = (LinearLayout) findViewById(R.id.linear12);
 		linear13 = (LinearLayout) findViewById(R.id.linear13);
@@ -119,15 +121,22 @@ public class SettingsActivity extends  AppCompatActivity  {
 		checkbox2 = (CheckBox) findViewById(R.id.checkbox2);
 		textview9 = (TextView) findViewById(R.id.textview9);
 		linear18 = (LinearLayout) findViewById(R.id.linear18);
-		textview10 = (TextView) findViewById(R.id.textview10);
 		imageview6 = (ImageView) findViewById(R.id.imageview6);
+		textview10 = (TextView) findViewById(R.id.textview10);
 		linear22 = (LinearLayout) findViewById(R.id.linear22);
-		textview13 = (TextView) findViewById(R.id.textview13);
 		imageview8 = (ImageView) findViewById(R.id.imageview8);
+		textview13 = (TextView) findViewById(R.id.textview13);
 		settings = getSharedPreferences("settings", Activity.MODE_PRIVATE);
 		line = getSharedPreferences("line", Activity.MODE_PRIVATE);
 		dark = getSharedPreferences("dark", Activity.MODE_PRIVATE);
 		size = getSharedPreferences("size", Activity.MODE_PRIVATE);
+		
+		imageview1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				finish();
+			}
+		});
 		
 		linear24.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -362,6 +371,7 @@ public class SettingsActivity extends  AppCompatActivity  {
 		}
 		_googleSans();
 		_initSlideActivity();
+		_circleRipple("#BDBDBD", imageview1);
 	}
 	
 	@Override
@@ -408,8 +418,6 @@ public class SettingsActivity extends  AppCompatActivity  {
 			_setBackground(linear18, 20, 9, "#000000", true);
 			_setBackground(linear22, 20, 9, "#000000", true);
 			_setBackground(linear24, 20, 9, "#000000", true);
-			_ICC(imageview4, "#FFFFFF", "#FFFFFF");
-			_ICC(imageview5, "#FFFFFF", "#FFFFFF");
 			textview1.setTextColor(0xFFFFFFFF);
 			textview8.setTextColor(0xFFFFFFFF);
 			textview9.setTextColor(0xFFFFFFFF);
@@ -417,14 +425,11 @@ public class SettingsActivity extends  AppCompatActivity  {
 			textview13.setTextColor(0xFFFFFFFF);
 			textview14.setTextColor(0xFFFFFFFF);
 			
-			android.graphics.drawable.GradientDrawable SketchUi = new android.graphics.drawable.GradientDrawable();
-			int d = (int) getApplicationContext().getResources().getDisplayMetrics().density;
-			SketchUi.setColor(0xFF212121);SketchUi.setCornerRadii(new float[]{
-				d*0,d*0,d*0 ,d*0,d*56,d*56 ,d*56,d*56});
-			linear.setElevation(d*14);
-			android.graphics.drawable.RippleDrawable SketchUiRD = new android.graphics.drawable.RippleDrawable(new android.content.res.ColorStateList(new int[][]{new int[]{}}, new int[]{0xFF212121}), SketchUi, null);
-			linear.setBackground(SketchUiRD);
-			linear.setClickable(true);
+			int[] colorsCRNDA2 = { Color.parseColor("#212121"), Color.parseColor("#212121") }; android.graphics.drawable.GradientDrawable CRNDA2 = new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colorsCRNDA2);
+			CRNDA2.setCornerRadii(new float[]{(int)0,(int)0,(int)0,(int)0,(int)15,(int)15,(int)15,(int)15});
+			CRNDA2.setStroke((int) 0, Color.parseColor("#000000"));
+			linear.setElevation((float) 15);
+			linear.setBackground(CRNDA2);
 			Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#212121"));
 			View decor = getWindow().getDecorView();
 			decor.setSystemUiVisibility(0);
@@ -433,31 +438,27 @@ public class SettingsActivity extends  AppCompatActivity  {
 				w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 				w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); w.setStatusBarColor(0xFF212121);
 			}
+			imageview1.setImageResource(R.drawable.ic_arrow_back_white);
 			linear1.setBackgroundColor(0xFF212121);
 		}
 		else {
-			vscroll1.setBackgroundColor(0xFFFAFAFA);
-			linear1.setBackgroundColor(0xFFFAFAFA);
+			vscroll1.setBackgroundColor(0xFFFFFFFF);
+			linear1.setBackgroundColor(0xFFFFFFFF);
 			_setBackground(linear12, 20, 9, "#FFFFFF", false);
 			_setBackground(linear18, 20, 9, "#FFFFFF", true);
 			_setBackground(linear22, 20, 9, "#FFFFFF", true);
 			_setBackground(linear24, 20, 9, "#FFFFFF", true);
-			_ICC(imageview4, "#000000", "#FFFFFF");
-			_ICC(imageview5, "#000000", "#FFFFFF");
 			textview1.setTextColor(0xFF000000);
 			textview8.setTextColor(0xFF000000);
 			textview9.setTextColor(0xFF000000);
 			textview10.setTextColor(0xFF000000);
 			textview13.setTextColor(0xFF000000);
 			textview14.setTextColor(0xFF000000);
-			android.graphics.drawable.GradientDrawable SketchUi = new android.graphics.drawable.GradientDrawable();
-			int d = (int) getApplicationContext().getResources().getDisplayMetrics().density;
-			SketchUi.setColor(0xFFFAFAFA);SketchUi.setCornerRadii(new float[]{
-				d*0,d*0,d*0 ,d*0,d*56,d*56 ,d*56,d*56});
-			linear.setElevation(d*14);
-			android.graphics.drawable.RippleDrawable SketchUiRD = new android.graphics.drawable.RippleDrawable(new android.content.res.ColorStateList(new int[][]{new int[]{}}, new int[]{0xFFF5F5F5}), SketchUi, null);
-			linear.setBackground(SketchUiRD);
-			linear.setClickable(true);
+			int[] colorsCRNDA = { Color.parseColor("#ffffff"), Color.parseColor("#ffffff") }; android.graphics.drawable.GradientDrawable CRNDA = new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colorsCRNDA);
+			CRNDA.setCornerRadii(new float[]{(int)0,(int)0,(int)0,(int)0,(int)15,(int)15,(int)15,(int)15});
+			CRNDA.setStroke((int) 0, Color.parseColor("#000000"));
+			linear.setElevation((float) 15);
+			linear.setBackground(CRNDA);
 			if (Double.parseDouble(Build.VERSION.SDK) > 28) {
 				Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#F5F5F5"));
 			}
@@ -471,19 +472,15 @@ public class SettingsActivity extends  AppCompatActivity  {
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
 				Window w =SettingsActivity.this.getWindow();
 				w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-				w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); w.setStatusBarColor(0xFFFAFAFA);
+				w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); w.setStatusBarColor(0xFFFFFFFF);
 			}
+			imageview1.setImageResource(R.drawable.ic_arrow_back_black);
 		}
 	}
 	
 	
-	public void _ICC (final ImageView _img, final String _c1, final String _c2) {
-		_img.setImageTintList(new android.content.res.ColorStateList(new int[][] {{-android.R.attr.state_pressed},{android.R.attr.state_pressed}},new int[]{Color.parseColor(_c1), Color.parseColor(_c2)}));
-	}
-	
-	
 	public void _googleSans () {
-		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
+		
 		textview8.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
 		textview9.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
 		textview10.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
@@ -666,6 +663,13 @@ public class SettingsActivity extends  AppCompatActivity  {
 	}
 	
 	{
+	}
+	
+	
+	public void _circleRipple (final String _color, final View _v) {
+		android.content.res.ColorStateList clrb = new android.content.res.ColorStateList(new int[][]{new int[]{}}, new int[]{Color.parseColor(_color)});
+		android.graphics.drawable.RippleDrawable ripdrb = new android.graphics.drawable.RippleDrawable(clrb , null, null);
+		_v.setBackground(ripdrb);
 	}
 	
 	

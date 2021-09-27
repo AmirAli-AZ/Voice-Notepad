@@ -40,7 +40,10 @@
 			android:name=".VoiceActivity"
 			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
 			android:hardwareAccelerated="true"
-			android:supportsPictureInPicture="true"/>
+			android:supportsPictureInPicture="true"
+			android:screenOrientation="portrait"
+			android:theme="@style/AppTheme"
+			android:windowSoftInputMode="adjustResize"/>
 		<activity
 			android:name=".InfoActivity"
 			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
@@ -105,17 +108,55 @@
 			android:supportsPictureInPicture="true"
 			android:windowSoftInputMode="stateHidden"/>
 		<activity
+			android:name=".TextviewerActivity"
+			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+			android:hardwareAccelerated="true"
+			android:supportsPictureInPicture="true"/>
+		<activity
+			android:name=".WidgetconfigActivity"
+			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+			android:hardwareAccelerated="true"
+			android:supportsPictureInPicture="true"/>
+		<activity
 			android:name=".DebugActivity"
 			android:screenOrientation="portrait"/>
 		<uses-library
 			android:name="org.apache.http.legacy"
 			android:required="false"/>
-               <receiver android:name="MyWidget" >
+<receiver android:name=".MyWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
+            <meta-data
+                android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
+        
+        <activity android:name=".WidgetconfigActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".MainActivity"
+        android:exported="true">
+        	<intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="file" />
+        <data android:mimeType="*/*" />
+        <data android:pathPattern=".*\\.java" />
+        <data android:pathPattern=".*\\.txt" />
+        <data android:pathPattern=".*\\.xml" />
+        <data android:pathPattern=".*\\.html" />
+        <data android:pathPattern=".*\\.htm" />
+        <data android:pathPattern=".*\\.php" />
+        <data android:pathPattern=".*\\.css" />
+        <data android:pathPattern=".*\\.json" />
+        <data android:pathPattern=".*\\.js"/>
+        <data android:host="*" />
+</intent-filter>
+</activity>
 	</application>
 </manifest>

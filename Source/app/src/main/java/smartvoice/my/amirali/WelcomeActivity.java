@@ -86,6 +86,9 @@ public class WelcomeActivity extends  AppCompatActivity  {
 		textview2.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
+				if (mMediaPlayer.isPlaying()) {
+					mMediaPlayer.pause();
+				}
 				welcome.edit().putString("welcome", "false").commit();
 				fabTarget.edit().putString("fabTarget", "true").commit();
 				finish();

@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import android.widget.LinearLayout;
 import android.widget.HorizontalScrollView;
-import android.widget.ScrollView;
 import android.widget.ImageView;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -60,9 +59,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.widget.TextView.OnEditorActionListener;
-import android.view.inputmethod.InputMethodManager;
-import android.view.inputmethod.EditorInfo;
+import androidx.core.widget.NestedScrollView;
 
 public class VoiceActivity extends  AppCompatActivity  { 
 	
@@ -85,6 +82,7 @@ public class VoiceActivity extends  AppCompatActivity  {
 	private boolean is_show = false;
 	private String text1 = "";
 	private  TextViewUndoRedo helper;
+	private boolean isKeyboardVisible = false;
 	
 	private ArrayList<String> stringlist = new ArrayList<>();
 	private ArrayList<String> adverbs = new ArrayList<>();
@@ -93,7 +91,7 @@ public class VoiceActivity extends  AppCompatActivity  {
 	
 	private LinearLayout main_linear;
 	private HorizontalScrollView hscroll2;
-	private ScrollView vscroll1;
+	private NestedScrollView vscroll1;
 	private LinearLayout linear4;
 	private LinearLayout tools_linear;
 	private ImageView imageview9;
@@ -155,7 +153,7 @@ public class VoiceActivity extends  AppCompatActivity  {
 		
 		main_linear = (LinearLayout) findViewById(R.id.main_linear);
 		hscroll2 = (HorizontalScrollView) findViewById(R.id.hscroll2);
-		vscroll1 = (ScrollView) findViewById(R.id.vscroll1);
+		vscroll1 = (NestedScrollView) findViewById(R.id.vscroll1);
 		linear4 = (LinearLayout) findViewById(R.id.linear4);
 		tools_linear = (LinearLayout) findViewById(R.id.tools_linear);
 		imageview9 = (ImageView) findViewById(R.id.imageview9);
@@ -312,7 +310,10 @@ public class VoiceActivity extends  AppCompatActivity  {
 					edittext2.setText(edittext1.getText().toString().substring((int)(edittext1.getSelectionStart()), (int)(edittext1.getSelectionEnd())));
 				}
 				edittext2.requestFocus();
-				SketchwareUtil.showKeyboard(getApplicationContext());
+				if(!isKeyboardVisible){
+						if(edittext2.requestFocus())
+						KeyboardUtils.toggleKeyboardVisibility(getApplicationContext());
+				}
 			}
 		});
 		
@@ -409,15 +410,17 @@ public class VoiceActivity extends  AppCompatActivity  {
 				b2.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
 						if (kode.getText().toString().length() > 0) {
 							if (FileUtil.isExistFile(tts_S.getString("storage_location", ""))) {
-								tts.setPitch((float)Double.parseDouble(tts_S.getString("pitch", "")));
-								tts.setSpeechRate((float)Double.parseDouble(tts_S.getString("rate", "")));
-								tts.speak(edittext1.getText().toString(), TextToSpeech.QUEUE_ADD, null);
-								path = tts_S.getString("storage_location", "").concat(kode.getText().toString().concat(".mp3"));
-								java.io.File myfile = new
-								java.io.File(path);
-								FileUtil.writeFile(path, "");
-								tts.synthesizeToFile(edittext1.getText(), null, myfile, "tts");
-								_custom_toast("The file was saved in".concat(tts_S.getString("storage_location", "")));
+								if (!(tts_S.getString("pitch", "").equals("") && tts_S.getString("rate", "").equals(""))) {
+									tts.setPitch((float)Double.parseDouble(tts_S.getString("pitch", "")));
+									tts.setSpeechRate((float)Double.parseDouble(tts_S.getString("rate", "")));
+									tts.speak(edittext1.getText().toString(), TextToSpeech.QUEUE_ADD, null);
+									path = tts_S.getString("storage_location", "").concat(kode.getText().toString().concat(".mp3"));
+									java.io.File myfile = new
+									java.io.File(path);
+									FileUtil.writeFile(path, "");
+									tts.synthesizeToFile(edittext1.getText(), null, myfile, "tts");
+									_custom_toast("The file was saved in".concat(tts_S.getString("storage_location", "")));
+								}
 							}
 							else {
 								_custom_toast("not exist ".concat(tts_S.getString("storage_location", "")));
@@ -735,6 +738,7 @@ public class VoiceActivity extends  AppCompatActivity  {
 	}
 	
 	private void initializeLogic() {
+		
 		_questions();
 		_adverb();
 		_circleRipple("#BDBDBD", re);
@@ -774,19 +778,6 @@ public class VoiceActivity extends  AppCompatActivity  {
 			line.edit().putString("line", "line2").commit();
 		}
 		linear4.setVisibility(View.GONE);
-		EditText editText = (EditText)findViewById(R.id.edittext2); editText.setOnEditorActionListener(new OnEditorActionListener() {
-			@Override
-			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				boolean handled = false;
-				if (actionId == EditorInfo.IME_ACTION_DONE) { 
-					_onClick_keyboard_button();
-					_hideSoftKeyboard(edittext2);
-					handled = true;
-				}
-				return handled;
-			}
-		});
-		_dark_mode();
 		_changeActivityFont("google_sans_regular");
 		edittext1.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
 			
@@ -803,6 +794,7 @@ public class VoiceActivity extends  AppCompatActivity  {
 			    @Override
 			    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				     menu.add(0,0,0,"Capitals");
+					 menu.add(0,1,0,"Read");
 				     return true;
 				    }
 			
@@ -823,8 +815,16 @@ public class VoiceActivity extends  AppCompatActivity  {
 					       final String selectedText = text3.subSequence(min, max).toString();
 					       edittext1.setText("");
 					       edittext1.append(text3.subSequence(0, min)+selectedText.toUpperCase()+ text3.subSequence(max, text3.length()));
-					   edittext1.setSelection(max);    
+					       edittext1.setSelection(max);    
 					     return true;
+						 case 1:
+						    if (!(tts_S.getString("pitch", "").equals("") && tts_S.getString("rate", "").equals(""))) {
+									tts.setPitch((float)Double.parseDouble(tts_S.getString("pitch", "")));
+							        tts.setSpeechRate((float)Double.parseDouble(tts_S.getString("rate", "")));
+							        tts.speak(edittext1.getText().toString().substring((int)(edittext1.getSelectionStart()), (int)(edittext1.getSelectionEnd())), TextToSpeech.QUEUE_ADD, null);
+							}
+						 return true;
+						       
 					      default:
 					       break;
 					     }
@@ -885,6 +885,14 @@ public class VoiceActivity extends  AppCompatActivity  {
 			notificationManager.notify(1, builder.build());
 			tts_S.edit().putString("storage_location", FileUtil.getExternalStorageDir().concat("/Download/")).commit();
 		}
+		KeyboardUtils.addKeyboardToggleListener(this, new KeyboardUtils.SoftKeyboardToggleListener(){
+				@Override
+			    public void onToggleSoftKeyboard(boolean isVisible){
+				        isKeyboardVisible = isVisible;
+				
+				    }
+		});
+		_dark_mode();
 	}
 	
 	@Override
@@ -1078,11 +1086,6 @@ public class VoiceActivity extends  AppCompatActivity  {
 			//offline
 			_check_connection();
 		}
-	}
-	
-	
-	public void _hideSoftKeyboard (final View _view) {
-		InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE); inputMethodManager.hideSoftInputFromWindow(_view.getWindowToken(), 0);
 	}
 	
 	
@@ -1529,6 +1532,7 @@ public class VoiceActivity extends  AppCompatActivity  {
 			case MotionEvent.ACTION_MOVE: 
 			if (!lockSwipe){
 				if(enableSwipe){
+					
 					float translation = event.getRawX() -downX - MIN_DISTANCE;
 					if (translation >= rootView.getWidth() || translation<= 0){
 						rootView.setTranslationX(0);

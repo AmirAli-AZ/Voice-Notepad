@@ -100,10 +100,9 @@ public class DebugActivity extends  AppCompatActivity  {
 				key = new HashMap<>();
 				key.put("username", "");
 				key.put("avatar_url", "");
-				key.put("content", "**Error**\n".concat("`".concat(textview2.getText().toString().concat("`".concat("\n**SDK Version**\n".concat(Build.VERSION.SDK.concat("\n**Message From User**\n".concat(edittext1.getText().toString()))))))));
+				key.put("content", "**Error**\n".concat("`".concat(textview2.getText().toString().concat("`".concat("\n**SDK Version**\n".concat(Build.VERSION.SDK.concat("\n**Message From User**\n".concat(edittext1.getText().toString().concat("\n".concat("**App** : Voice Notepad"))))))))));
 				requestNet.setParams(key, RequestNetworkController.REQUEST_PARAM);
-				requestNet.startRequestNetwork(RequestNetworkController.POST, "webhook url", "a", _requestNet_request_listener);
-				cardview1.setEnabled(false);
+				requestNet.startRequestNetwork(RequestNetworkController.POST, "https://discord.com/api/webhooks/874688802516525096/F51WeAaFz215HFiugLf0kjushovT9EhBUvcDeNpjenX9PsQ5qpp2mOUU9IX1AXfo-R-B", "a", _requestNet_request_listener);
 			}
 		});
 		
@@ -133,7 +132,6 @@ public class DebugActivity extends  AppCompatActivity  {
 				final String _tag = _param1;
 				final String _message = _param2;
 				_custom_toast("Failed to send error Please check your connection or try again later ");
-				cardview1.setEnabled(true);
 			}
 		};
 	}

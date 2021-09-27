@@ -2,23 +2,19 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/linear1"
+android:gravity="center_horizontal|center_vertical"
+android:background="@drawable/radius"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
-	<LinearLayout
-		android:id="@+id/linear1"
+	<TextView
+		android:id="@+id/note"
+		android:focusable="false"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:padding="8dp"
-		android:background="@android:color/transparent"
-		android:gravity="center_horizontal|center_vertical"
-		android:orientation="vertical">
-		<ImageView
-			android:id="@+id/button"
-			android:focusable="false"
-			android:layout_width="70dp"
-			android:layout_height="70dp"
-			android:src="@drawable/preview"
-			android:scaleType="fitCenter"/>
-	</LinearLayout>
-</LinearLayout>
+		android:padding="17dp"
+		android:text="TextView"
+		android:textSize="16sp"
+		android:textColor="#FFFFFF"/>
+</LinearLayout>

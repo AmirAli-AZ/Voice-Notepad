@@ -40,9 +40,9 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.BounceInterpolator;
 import android.view.View;
+import android.graphics.Typeface;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import android.graphics.Typeface;
 import com.bumptech.glide.Glide;
 import com.zolad.zoominimageview.*;
 import androidx.fragment.app.Fragment;
@@ -102,15 +102,13 @@ public class NewsVnActivity extends  AppCompatActivity  {
 				final String _tag = _param1;
 				final String _response = _param2;
 				final HashMap<String, Object> _responseHeaders = _param3;
-				try {
+				if (_isJson(_response)) {
 					_Custom_Loading(false);
 					listmap = new Gson().fromJson(_response, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 					Collections.reverse(listmap);
 					offline.edit().putString("offline_data", new Gson().toJson(listmap)).commit();
 					listview1.setAdapter(new Listview1Adapter(listmap));
 					((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-				} catch(Exception _e){
-					    //Code To Run When Exception Thrown
 				}
 			}
 			
@@ -129,6 +127,12 @@ public class NewsVnActivity extends  AppCompatActivity  {
 		listview1.setVerticalScrollBarEnabled(false);
 		_circleRipple("#BDBDBD", imageview1);
 		if (dark.getString("dark", "").equals("true")) {
+			int[] colorsCRNDA2 = { Color.parseColor("#212121"), Color.parseColor("#212121") }; android.graphics.drawable.GradientDrawable CRNDA2 = new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colorsCRNDA2);
+			CRNDA2.setCornerRadii(new float[]{(int)0,(int)0,(int)0,(int)0,(int)15,(int)15,(int)15,(int)15});
+			CRNDA2.setStroke((int) 0, Color.parseColor("#000000"));
+			linear1.setElevation((float) 15);
+			linear1.setBackground(CRNDA2);
+			
 			Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#212121"));
 			View decor = getWindow().getDecorView();
 			decor.setSystemUiVisibility(0);
@@ -141,9 +145,14 @@ public class NewsVnActivity extends  AppCompatActivity  {
 			textview1.setTextColor(0xFFFFFFFF);
 			linear2.setBackgroundColor(0xFF212121);
 			bg.setBackgroundColor(0xFF212121);
-			linear1.setBackgroundColor(0xFF212121);
 		}
 		else {
+			int[] colorsCRNDA = { Color.parseColor("#ffffff"), Color.parseColor("#ffffff") }; android.graphics.drawable.GradientDrawable CRNDA = new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colorsCRNDA);
+			CRNDA.setCornerRadii(new float[]{(int)0,(int)0,(int)0,(int)0,(int)15,(int)15,(int)15,(int)15});
+			CRNDA.setStroke((int) 0, Color.parseColor("#000000"));
+			linear1.setElevation((float) 15);
+			linear1.setBackground(CRNDA);
+			
 			if (Double.parseDouble(Build.VERSION.SDK) > 28) {
 				Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#F5F5F5"));
 			}
@@ -163,7 +172,6 @@ public class NewsVnActivity extends  AppCompatActivity  {
 			textview1.setTextColor(0xFF000000);
 			bg.setBackgroundColor(0xFFFFFFFF);
 			linear2.setBackgroundColor(0xFFFFFFFF);
-			linear1.setBackgroundColor(0xFFFFFFFF);
 		}
 		_initSlideActivity();
 		android.net.ConnectivityManager CM = (android.net.ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -523,6 +531,21 @@ public class NewsVnActivity extends  AppCompatActivity  {
 		android.content.res.ColorStateList clrb = new android.content.res.ColorStateList(new int[][]{new int[]{}}, new int[]{Color.parseColor(_color)});
 		android.graphics.drawable.RippleDrawable ripdrb = new android.graphics.drawable.RippleDrawable(clrb , null, null);
 		_v.setBackground(ripdrb);
+	}
+	
+	
+	public boolean _isJson (final String _test) {
+		
+		    try {
+			        new JSONObject(_test);
+			    } catch (JSONException ex) {
+			        try {
+				            new JSONArray(_test);
+				        } catch (JSONException ex1) {
+				            return false;
+				        }
+			    }
+		    return true;
 	}
 	
 	

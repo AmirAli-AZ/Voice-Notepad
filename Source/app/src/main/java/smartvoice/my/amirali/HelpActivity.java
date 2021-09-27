@@ -89,9 +89,9 @@ public class HelpActivity extends  AppCompatActivity  {
 						key = new HashMap<>();
 						key.put("username", "");
 						key.put("avatar_url", "");
-						key.put("content", "**User Email**\n".concat(telid.getText().toString().concat("\n**User Message**\n".concat(telmessage.getText().toString()))));
+						key.put("content", "**User Email**\n".concat(telid.getText().toString().concat("\n**User Message**\n".concat(telmessage.getText().toString().concat("\n".concat("**App** : Voice Notepad"))))));
 						help_feedback.setParams(key, RequestNetworkController.REQUEST_PARAM);
-						help_feedback.startRequestNetwork(RequestNetworkController.POST, "webhook url", "a", _help_feedback_request_listener);
+						help_feedback.startRequestNetwork(RequestNetworkController.POST, "https://discord.com/api/webhooks/874688802516525096/F51WeAaFz215HFiugLf0kjushovT9EhBUvcDeNpjenX9PsQ5qpp2mOUU9IX1AXfo-R-B", "a", _help_feedback_request_listener);
 					}
 					else {
 						_custom_toast("Enter Email");

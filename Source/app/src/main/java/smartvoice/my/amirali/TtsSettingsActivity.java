@@ -23,7 +23,6 @@ import java.util.*;
 import java.util.regex.*;
 import java.text.*;
 import org.json.*;
-import android.widget.ScrollView;
 import android.widget.LinearLayout;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,9 +33,9 @@ import android.content.Intent;
 import android.net.Uri;
 import java.util.Timer;
 import java.util.TimerTask;
-import android.view.View;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.graphics.Typeface;
 import com.zolad.zoominimageview.*;
 import androidx.fragment.app.Fragment;
@@ -46,7 +45,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
-
+import androidx.core.widget.NestedScrollView;
 
 public class TtsSettingsActivity extends  AppCompatActivity  { 
 	
@@ -54,7 +53,7 @@ public class TtsSettingsActivity extends  AppCompatActivity  {
 	
 	private String text1 = "";
 	
-	private ScrollView vscroll1;
+	private NestedScrollView vscroll1;
 	private LinearLayout linear1;
 	private LinearLayout linear2;
 	private LinearLayout linear3;
@@ -98,7 +97,7 @@ public class TtsSettingsActivity extends  AppCompatActivity  {
 	
 	private void initialize(Bundle _savedInstanceState) {
 		
-		vscroll1 = (ScrollView) findViewById(R.id.vscroll1);
+		vscroll1 = (NestedScrollView) findViewById(R.id.vscroll1);
 		linear1 = (LinearLayout) findViewById(R.id.linear1);
 		linear2 = (LinearLayout) findViewById(R.id.linear2);
 		linear3 = (LinearLayout) findViewById(R.id.linear3);
@@ -143,13 +142,6 @@ public class TtsSettingsActivity extends  AppCompatActivity  {
 			@Override
 			public void afterTextChanged(Editable _param1) {
 				
-			}
-		});
-		
-		imageview1.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View _view) {
-				finish();
 			}
 		});
 		
@@ -222,6 +214,13 @@ public class TtsSettingsActivity extends  AppCompatActivity  {
 			linear1.setBackgroundColor(0xFF212121);
 			vscroll1.setBackgroundColor(0xFF212121);
 			textview5.setTextColor(0xFFFFFFFF);
+			int[] colorsCRNDA2 = { Color.parseColor("#212121"), Color.parseColor("#212121") }; android.graphics.drawable.GradientDrawable CRNDA2 = new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colorsCRNDA2);
+			CRNDA2.setCornerRadii(new float[]{(int)0,(int)0,(int)0,(int)0,(int)15,(int)15,(int)15,(int)15});
+			CRNDA2.setStroke((int) 0, Color.parseColor("#000000"));
+			linear2.setElevation((float) 15);
+			linear2.setBackground(CRNDA2);
+			
+			
 			Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#212121"));
 			View decor = getWindow().getDecorView();
 			decor.setSystemUiVisibility(0);
@@ -243,9 +242,16 @@ public class TtsSettingsActivity extends  AppCompatActivity  {
 			edittext2.setTextColor(0xFF000000);
 			edittext3.setTextColor(0xFF000000);
 			imageview1.setImageResource(R.drawable.ic_arrow_back_black);
-			linear1.setBackgroundColor(0xFFFAFAFA);
-			vscroll1.setBackgroundColor(0xFFFAFAFA);
+			linear1.setBackgroundColor(0xFFFFFFFF);
+			vscroll1.setBackgroundColor(0xFFFFFFFF);
 			textview5.setTextColor(0xFF000000);
+			int[] colorsCRNDA = { Color.parseColor("#ffffff"), Color.parseColor("#ffffff") }; android.graphics.drawable.GradientDrawable CRNDA = new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colorsCRNDA);
+			CRNDA.setCornerRadii(new float[]{(int)0,(int)0,(int)0,(int)0,(int)15,(int)15,(int)15,(int)15});
+			CRNDA.setStroke((int) 0, Color.parseColor("#000000"));
+			linear2.setElevation((float) 15);
+			linear2.setBackground(CRNDA);
+			
+			
 			if (Double.parseDouble(Build.VERSION.SDK) > 28) {
 				Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#F5F5F5"));
 			}
@@ -259,7 +265,7 @@ public class TtsSettingsActivity extends  AppCompatActivity  {
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
 				Window w =TtsSettingsActivity.this.getWindow();
 				w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-				w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); w.setStatusBarColor(0xFFFAFAFA);
+				w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); w.setStatusBarColor(0xFFFFFFFF);
 			}
 		}
 		_createChannel();
@@ -339,7 +345,7 @@ public class TtsSettingsActivity extends  AppCompatActivity  {
 	
 	
 	public void _googleSans () {
-		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
+		
 		textview2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
 		textview3.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
 		textview4.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);

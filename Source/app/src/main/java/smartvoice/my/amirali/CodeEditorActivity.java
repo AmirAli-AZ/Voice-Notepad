@@ -62,6 +62,7 @@ public class CodeEditorActivity extends  AppCompatActivity  {
 	private String clipdata = "";
 	private String path = "";
 	private  TextViewUndoRedo helper;
+	private boolean isKeyboardVisible = false;
 	
 	private ArrayList<String> str = new ArrayList<>();
 	
@@ -80,11 +81,13 @@ public class CodeEditorActivity extends  AppCompatActivity  {
 	private HorizontalScrollView hscroll1;
 	private LinearLayout linear10;
 	private LinearLayout linear7;
+	private TextView textview22;
 	private TextView textview2;
 	private TextView textview3;
 	private TextView textview4;
 	private TextView textview5;
 	private TextView textview6;
+	private TextView textview23;
 	private TextView textview7;
 	private TextView textview8;
 	private TextView textview9;
@@ -143,11 +146,13 @@ public class CodeEditorActivity extends  AppCompatActivity  {
 		hscroll1 = (HorizontalScrollView) findViewById(R.id.hscroll1);
 		linear10 = (LinearLayout) findViewById(R.id.linear10);
 		linear7 = (LinearLayout) findViewById(R.id.linear7);
+		textview22 = (TextView) findViewById(R.id.textview22);
 		textview2 = (TextView) findViewById(R.id.textview2);
 		textview3 = (TextView) findViewById(R.id.textview3);
 		textview4 = (TextView) findViewById(R.id.textview4);
 		textview5 = (TextView) findViewById(R.id.textview5);
 		textview6 = (TextView) findViewById(R.id.textview6);
+		textview23 = (TextView) findViewById(R.id.textview23);
 		textview7 = (TextView) findViewById(R.id.textview7);
 		textview8 = (TextView) findViewById(R.id.textview8);
 		textview9 = (TextView) findViewById(R.id.textview9);
@@ -206,6 +211,13 @@ public class CodeEditorActivity extends  AppCompatActivity  {
 			}
 		});
 		
+		textview22.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				_type_symbol("  ");
+			}
+		});
+		
 		textview2.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
@@ -238,6 +250,13 @@ public class CodeEditorActivity extends  AppCompatActivity  {
 			@Override
 			public void onClick(View _view) {
 				_type_symbol("\"");
+			}
+		});
+		
+		textview23.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				_type_symbol("'");
 			}
 		});
 		
@@ -399,7 +418,7 @@ public class CodeEditorActivity extends  AppCompatActivity  {
 		_circleRipple("#BDBDBD", imageview2);
 		_circleRipple("#BDBDBD", imageview3);
 		_circleRipple("#BDBDBD", imageview4);
-		met = new SketchwareEditText(this);
+		met = new CodeEditor(this);
 		
 		met.setLayoutParams(new LinearLayout.LayoutParams(-1,-1));
 		
@@ -408,7 +427,7 @@ public class CodeEditorActivity extends  AppCompatActivity  {
 		met.setWrapTextEnabled(false);
 		
 		// if only wrap text is disabled/false
-		// met.setHorizontallyScrolling(true);
+		met.setHorizontallyScrolling(true);
 		
 		//met.setLineNumberColor(Color.parseColor("#FFFFFF"));
 		
@@ -450,6 +469,13 @@ public class CodeEditorActivity extends  AppCompatActivity  {
 		_removeScollBar(hscroll1);
 		_dark_mode();
 		textview21.setText(Uri.parse(save.getString("save", "")).getLastPathSegment());
+		KeyboardUtils.addKeyboardToggleListener(this, new KeyboardUtils.SoftKeyboardToggleListener(){
+				@Override
+			    public void onToggleSoftKeyboard(boolean isVisible){
+				        isKeyboardVisible = isVisible;
+				
+				    }
+		});
 	}
 	
 	@Override
@@ -497,19 +523,16 @@ public class CodeEditorActivity extends  AppCompatActivity  {
 	}
 	public void _initLibs () {
 	}
-	private SketchwareEditText met;
-	public class SketchwareEditText extends EditText {
+	private CodeEditor met;
+	public class CodeEditor extends EditText {
 		
 		public Rect rect;
 		public Paint paint;
 		public int line, baseline, lineCount, dip, c;
 		public boolean lineCountDivider = true;
 		
-		/*
-This Library was fully created by AdityaKapal362 for Sketchware educational purpose, you're not allowed to claim that this yours.
-*/
 		
-		public SketchwareEditText(Context a) {
+		public CodeEditor(Context a) {
 			super(a);
 			dip = (int)getDip(2);
 			rect = new Rect();
@@ -603,53 +626,62 @@ This Library was fully created by AdityaKapal362 for Sketchware educational purp
 		//popup is the name of your custom view
 		
 		final PopupWindow popup = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-		TextView txt1 = popupView.findViewById(R.id.txt1);
+		final TextView txt1 = popupView.findViewById(R.id.txt1);
 		
-		TextView txt2 = popupView.findViewById(R.id.txt2);
+		final TextView txt2 = popupView.findViewById(R.id.txt2);
 		
-		TextView txt3 = popupView.findViewById(R.id.txt2);
+		final TextView txt3 = popupView.findViewById(R.id.txt2);
 		
-		TextView txt4 = popupView.findViewById(R.id.txt4);
+		final TextView txt4 = popupView.findViewById(R.id.txt4);
 		
-		TextView txt5 = popupView.findViewById(R.id.txt5);
+		final TextView txt5 = popupView.findViewById(R.id.txt5);
 		
-		TextView txt6 = popupView.findViewById(R.id.txt6);
+		final TextView txt6 = popupView.findViewById(R.id.txt6);
 		
-		LinearLayout lin_popup = popupView.findViewById(R.id.lin_popup);
+		final TextView txt7 = popupView.findViewById(R.id.txt7);
 		
-		LinearLayout lin_import = popupView.findViewById(R.id.lin_import);
+		final LinearLayout lin_popup = popupView.findViewById(R.id.lin_popup);
 		
-		LinearLayout lin_search = popupView.findViewById(R.id.lin_search);
+		final LinearLayout lin_import = popupView.findViewById(R.id.lin_import);
 		
-		LinearLayout lin_copy = popupView.findViewById(R.id.lin_copy);
+		final LinearLayout lin_search = popupView.findViewById(R.id.lin_search);
 		
-		LinearLayout lin_paste = popupView.findViewById(R.id.lin_paste);
+		final LinearLayout lin_copy = popupView.findViewById(R.id.lin_copy);
 		
-		LinearLayout lin_U = popupView.findViewById(R.id.lin_U);
+		final LinearLayout lin_paste = popupView.findViewById(R.id.lin_paste);
 		
-		LinearLayout lin_L = popupView.findViewById(R.id.lin_L);
+		final LinearLayout lin_U = popupView.findViewById(R.id.lin_U);
 		
-		LinearLayout div1 = popupView.findViewById(R.id.div1);
+		final LinearLayout lin_L = popupView.findViewById(R.id.lin_L);
 		
-		LinearLayout div2 = popupView.findViewById(R.id.div2);
+		final LinearLayout lin_Prettify = popupView.findViewById(R.id.lin_Prettify);
 		
-		LinearLayout div3 = popupView.findViewById(R.id.div3);
+		final LinearLayout div1 = popupView.findViewById(R.id.div1);
 		
-		LinearLayout div4 = popupView.findViewById(R.id.div4);
+		final LinearLayout div2 = popupView.findViewById(R.id.div2);
 		
-		LinearLayout div5 = popupView.findViewById(R.id.div5);
+		final LinearLayout div3 = popupView.findViewById(R.id.div3);
 		
-		ImageView img1 = popupView.findViewById(R.id.img1);
+		final LinearLayout div4 = popupView.findViewById(R.id.div4);
 		
-		ImageView img2 = popupView.findViewById(R.id.img2);
+		final LinearLayout div5 = popupView.findViewById(R.id.div5);
 		
-		ImageView img3 = popupView.findViewById(R.id.img3);
+		final LinearLayout div6 = popupView.findViewById(R.id.div6);
 		
-		ImageView img4 = popupView.findViewById(R.id.img4);
+		final ImageView img1 = popupView.findViewById(R.id.img1);
 		
-		ImageView img5 = popupView.findViewById(R.id.img5);
+		final ImageView img2 = popupView.findViewById(R.id.img2);
 		
-		ImageView img6 = popupView.findViewById(R.id.img6);
+		final ImageView img3 = popupView.findViewById(R.id.img3);
+		
+		final ImageView img4 = popupView.findViewById(R.id.img4);
+		
+		final ImageView img5 = popupView.findViewById(R.id.img5);
+		
+		final ImageView img6 = popupView.findViewById(R.id.img6);
+		
+		final ImageView img7 = popupView.findViewById(R.id.img7);
+		lin_popup.setClipToOutline(true);
 		android.graphics.drawable.GradientDrawable round = new android.graphics.drawable.GradientDrawable ();
 		round.setColor (Color.parseColor("#303030"));
 		
@@ -663,6 +695,11 @@ This Library was fully created by AdityaKapal362 for Sketchware educational purp
 		div3.setBackgroundColor(0xFF424242);
 		div4.setBackgroundColor(0xFF424242);
 		div5.setBackgroundColor(0xFF424242);
+		div6.setBackgroundColor(0xFF424242);
+		if (!save.getString("save", "").endsWith(".java")) {
+			lin_Prettify.setVisibility(View.GONE);
+			div6.setVisibility(View.GONE);
+		}
 		lin_import.setOnClickListener(new OnClickListener() { public void onClick(View view) {
 				startActivityForResult(fp, REQ_CD_FP);
 				popup.dismiss();
@@ -674,7 +711,10 @@ This Library was fully created by AdityaKapal362 for Sketchware educational purp
 					edittext1.setText(met.getText().toString().substring((int)(met.getSelectionStart()), (int)(met.getSelectionEnd())));
 				}
 				edittext1.requestFocus();
-				SketchwareUtil.showKeyboard(getApplicationContext());
+				if(!isKeyboardVisible){
+						if(edittext1.requestFocus())
+						KeyboardUtils.toggleKeyboardVisibility(getApplicationContext());
+				}
 				popup.dismiss();
 			} });
 		lin_copy.setOnClickListener(new OnClickListener() { public void onClick(View view) {
@@ -699,6 +739,32 @@ This Library was fully created by AdityaKapal362 for Sketchware educational purp
 		lin_L.setOnClickListener(new OnClickListener() { public void onClick(View view) {
 				//Lower Case
 				_UpperCase(met, false);
+				popup.dismiss();
+			} });
+		lin_Prettify.setOnClickListener(new OnClickListener() { public void onClick(View view) {
+				StringBuilder b = new StringBuilder();
+				
+				for (String line : met.getText().toString().split("\n"))
+				{
+						String trims = (line + "X").trim();
+						trims = trims.substring(0, trims.length() - 1);
+						
+						b.append(trims);
+						b.append("\n");
+				}
+				
+				boolean err = false;
+				String ss = b.toString();
+				try
+				{
+						ss = j(ss);
+				}
+				catch (Exception e)
+				{
+						err = true;
+						_custom_toast("Error: Your code contains incorrectly nested parentheses");
+				}
+				if (!err) met.setText(ss);
 				popup.dismiss();
 			} });
 		popup.setAnimationStyle(android.R.style.Animation_Dialog);
@@ -882,6 +948,8 @@ This Library was fully created by AdityaKapal362 for Sketchware educational purp
 			textview1.setTextColor(0xFFFFFFFF);
 			textview19.setTextColor(0xFFFFFFFF);
 			textview20.setTextColor(0xFFFFFFFF);
+			textview22.setTextColor(0xFFFFFFFF);
+			textview23.setTextColor(0xFFFFFFFF);
 		}
 		else {
 			hscroll1.setBackgroundColor(0xFFFFFFFF);
@@ -909,6 +977,8 @@ This Library was fully created by AdityaKapal362 for Sketchware educational purp
 			textview1.setTextColor(0xFF000000);
 			textview19.setTextColor(0xFF000000);
 			textview20.setTextColor(0xFF000000);
+			textview22.setTextColor(0xFF000000);
+			textview23.setTextColor(0xFF000000);
 		}
 	}
 	
@@ -945,6 +1015,213 @@ This Library was fully created by AdityaKapal362 for Sketchware educational purp
 		}
 	}
 	
+	{
+	}
+	
+	
+	public void _lib () {
+	}
+	public static void a(StringBuilder var0, int var1) {
+		        for (int var2 = 0; var2 < var1; ++var2)
+		        {
+			            var0.append('\t');
+			        }
+		
+		    }
+	
+	    public static String j(String var0) {
+		        StringBuilder var1 = new StringBuilder(4096);
+		        char[] var2 = var0.toCharArray();
+		        int var3 = var2.length;
+		        int var4 = 0;
+		        boolean var5 = false;
+		        boolean var6 = false;
+		        boolean var7 = false;
+		        int var8 = 0;
+		        boolean var9 = false;
+		
+		        int var19;
+		        for (boolean var10 = false; var4 < var3; var4 = var19)
+		        {
+			            int var13;
+			            boolean var14;
+			            boolean var15;
+			            boolean var16;
+			            boolean var17;
+			            int var18;
+			            label82:
+			            {
+				                char var11 = var2[var4];
+				                if (var5)
+				                {
+					                    if (var11 == 10)
+					                    {
+						                        var1.append(var11);
+						                        a(var1, var8);
+						                        var5 = false;
+						                    }
+					                    else
+					                    {
+						                        var1.append(var11);
+						                    }
+					                }
+				                else if (var6)
+				                {
+					                    label79:
+					                    {
+						                        if (var11 == 42)
+						                        {
+							                            int var40 = var4 + 1;
+							                            char var41 = var2[var40];
+							                            if (var41 == 47)
+							                            {
+								                                var1.append(var11);
+								                                var1.append(var41);
+								                                var4 = var40;
+								                                var6 = false;
+								                                break label79;
+								                            }
+							                        }
+						
+						                        var1.append(var11);
+						                    }
+					                }
+				                else if (var7)
+				                {
+					                    var1.append(var11);
+					                    var7 = false;
+					                }
+				                else if (var11 == 92)
+				                {
+					                    var1.append(var11);
+					                    var7 = true;
+					                }
+				                else if (var9)
+				                {
+					                    if (var11 == 39)
+					                    {
+						                        var1.append(var11);
+						                        var9 = false;
+						                    }
+					                    else
+					                    {
+						                        var1.append(var11);
+						                    }
+					                }
+				                else if (var10)
+				                {
+					                    if (var11 == 34)
+					                    {
+						                        var1.append(var11);
+						                        var10 = false;
+						                    }
+					                    else
+					                    {
+						                        var1.append(var11);
+						                    }
+					                }
+				                else
+				                {
+					                    label88:
+					                    {
+						                        if (var11 == 47)
+						                        {
+							                            int var27 = var4 + 1;
+							                            char var28 = var2[var27];
+							                            if (var28 == 47)
+							                            {
+								                                var1.append(var11);
+								                                var1.append(var28);
+								                                var5 = true;
+								                                var4 = var27;
+								                                break label88;
+								                            }
+							
+							                            if (var28 == 42)
+							                            {
+								                                var1.append(var11);
+								                                var1.append(var28);
+								                                var6 = true;
+								                                var4 = var27;
+								                                break label88;
+								                            }
+							                        }
+						
+						                        if (var11 != 10)
+						                        {
+							                            boolean var20;
+							                            if (var11 == 39)
+							                            {
+								                                var20 = true;
+								                            }
+							                            else
+							                            {
+								                                var20 = var9;
+								                            }
+							
+							                            boolean var21;
+							                            if (var11 == 34)
+							                            {
+								                                var21 = true;
+								                            }
+							                            else
+							                            {
+								                                var21 = var10;
+								                            }
+							
+							                            int var22;
+							                            if (var11 == 123)
+							                            {
+								                                var22 = var8 + 1;
+								                            }
+							                            else
+							                            {
+								                                var22 = var8;
+								                            }
+							
+							                            if (var11 == 125)
+							                            {
+								                                --var22;
+								                                if (var1.charAt(-1 + var1.length()) == 9)
+								                                {
+									                                    var1.deleteCharAt(-1 + var1.length());
+									                                }
+								                            }
+							
+							                            var1.append(var11);
+							                            var18 = var22;
+							                            var10 = var21;
+							                            var13 = var4;
+							                            var14 = var5;
+							                            var15 = var6;
+							                            var16 = var7;
+							                            var17 = var20;
+							                            break label82;
+							                        }
+						
+						                        var1.append(var11);
+						                        a(var1, var8);
+						                    }
+					                }
+				
+				                var13 = var4;
+				                var14 = var5;
+				                var15 = var6;
+				                var16 = var7;
+				                var17 = var9;
+				                var18 = var8;
+				            }
+			
+			            var19 = var13 + 1;
+			            var8 = var18;
+			            var9 = var17;
+			            var7 = var16;
+			            var6 = var15;
+			            var5 = var14;
+			        }
+		
+		        return var1.toString();
+		    }
 	{
 	}
 	

@@ -133,8 +133,10 @@ public class CopyFileActivity extends  AppCompatActivity  {
 			public void onItemClick(AdapterView<?> _param1, View _param2, int _param3, long _param4) {
 				final int _position = _param3;
 				if (FileUtil.isDirectory(listmap.get((int)_position).get("file").toString())) {
-					folder = listmap.get((int)_position).get("file").toString();
-					_refreshList();
+					if (FileUtil.isExistFile(listmap.get((int)_position).get("file").toString())) {
+						folder = listmap.get((int)_position).get("file").toString();
+						_refreshList();
+					}
 				}
 			}
 		});
@@ -168,6 +170,7 @@ public class CopyFileActivity extends  AppCompatActivity  {
 									else {
 										FileUtil.copyFile(copy_path.getString("copy_path", ""), path.concat(Uri.parse(copy_path.getString("copy_path", "")).getLastPathSegment()));
 										_refreshList();
+										_GoneAnimation();
 									}
 								}
 								else {
@@ -177,12 +180,10 @@ public class CopyFileActivity extends  AppCompatActivity  {
 									else {
 										FileUtil.copyFile(copy_path.getString("copy_path", ""), path.concat("/".concat(Uri.parse(copy_path.getString("copy_path", "")).getLastPathSegment())));
 										_refreshList();
+										_GoneAnimation();
 									}
 								}
 							}
-						}
-						else {
-							
 						}
 					}
 					else {
@@ -195,27 +196,17 @@ public class CopyFileActivity extends  AppCompatActivity  {
 									tts_S.edit().putString("storage_location", path.concat("/")).commit();
 								}
 								tts_S.edit().putString("name", Uri.parse(path).getLastPathSegment()).commit();
+								_GoneAnimation();
 							}
-						}
-						else {
-							
 						}
 					}
 				}
-				lin_copy.animate() 
-				.scaleY(0)
-				.setDuration(200)
-				.setListener(
-				new AnimatorListenerAdapter() { 
-							@Override public void onAnimationEnd(Animator animation) { 
-										super.onAnimationEnd(animation);
-						lin_copy.setVisibility(View.GONE);
-					} });
 			}
 		});
 	}
 	
 	private void initializeLogic() {
+		_create_note_folder();
 		textview2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_regular.ttf"), 0);
 		textview3.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
 		cancel.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
@@ -310,27 +301,29 @@ public class CopyFileActivity extends  AppCompatActivity  {
 		}
 	}
 	public void _refreshList () {
-		listmap.clear();
-		list.clear();
-		FileUtil.listDir(folder, list);
-		_SortString(list, true);
-		n = 0;
-		for(int _repeat14 = 0; _repeat14 < (int)(list.size()); _repeat14++) {
-			{
-				HashMap<String, Object> _item = new HashMap<>();
-				_item.put("file", list.get((int)(n)));
-				listmap.add(_item);
+		if (FileUtil.isExistFile(folder)) {
+			listmap.clear();
+			list.clear();
+			FileUtil.listDir(folder, list);
+			_SortString(list, true);
+			n = 0;
+			for(int _repeat14 = 0; _repeat14 < (int)(list.size()); _repeat14++) {
+				{
+					HashMap<String, Object> _item = new HashMap<>();
+					_item.put("file", list.get((int)(n)));
+					listmap.add(_item);
+				}
+				
+				n++;
 			}
-			
-			n++;
+			textview2.setText(folder);
+			path = folder;
+			if (selector_mode.getString("selector", "").equals("select_folder")) {
+				textview3.setText(folder);
+			}
+			listview1.setAdapter(new Listview1Adapter(listmap));
+			((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
 		}
-		textview2.setText(folder);
-		path = folder;
-		if (selector_mode.getString("selector", "").equals("select_folder")) {
-			textview3.setText(folder);
-		}
-		listview1.setAdapter(new Listview1Adapter(listmap));
-		((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
 	}
 	
 	
@@ -601,19 +594,46 @@ public class CopyFileActivity extends  AppCompatActivity  {
 		b2.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
 				if (!path.equals("")) {
 					if (path.substring((int)(path.length() - 1), (int)(path.length())).equals("/")) {
-						FileUtil.copyFile(copy_path.getString("copy_path", ""), path.concat(kode.getText().toString()));
-						_refreshList();
+						if (!FileUtil.isExistFile(path.concat(kode.getText().toString()))) {
+							FileUtil.copyFile(copy_path.getString("copy_path", ""), path.concat(kode.getText().toString()));
+							_refreshList();
+							bottomSheetDialog.dismiss();
+							_GoneAnimation();
+						}
 					}
 					else {
-						FileUtil.copyFile(copy_path.getString("copy_path", ""), path.concat("/".concat(kode.getText().toString())));
-						_refreshList();
+						if (!FileUtil.isExistFile(path.concat("/".concat(kode.getText().toString())))) {
+							FileUtil.copyFile(copy_path.getString("copy_path", ""), path.concat("/".concat(kode.getText().toString())));
+							_refreshList();
+							bottomSheetDialog.dismiss();
+							_GoneAnimation();
+						}
 					}
 				}
-				bottomSheetDialog.dismiss();
 			}
 		});
 		bottomSheetDialog.setCancelable(true);
 		bottomSheetDialog.show();
+	}
+	
+	
+	public void _create_note_folder () {
+		if (!FileUtil.isExistFile(FileUtil.getExternalStorageDir().concat("/smart voice"))) {
+			FileUtil.makeDir(FileUtil.getExternalStorageDir().concat("/smart voice"));
+		}
+	}
+	
+	
+	public void _GoneAnimation () {
+		lin_copy.animate() 
+		.scaleY(0)
+		.setDuration(200)
+		.setListener(
+		new AnimatorListenerAdapter() { 
+					@Override public void onAnimationEnd(Animator animation) { 
+								super.onAnimationEnd(animation);
+				lin_copy.setVisibility(View.GONE);
+			} });
 	}
 	
 	

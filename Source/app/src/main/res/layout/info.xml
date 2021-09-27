@@ -35,7 +35,7 @@
 						android:id="@+id/imageview1"
 						android:layout_width="50dp"
 						android:layout_height="50dp"
-						android:src="@drawable/icon"
+						android:src="@drawable/newicon"
 						android:scaleType="fitCenter"/>
 					<TextView
 						android:id="@+id/textview1"

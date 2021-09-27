@@ -36,6 +36,8 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.BounceInterpolator;
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import com.zolad.zoominimageview.*;
 import androidx.fragment.app.Fragment;
@@ -46,6 +48,10 @@ import androidx.fragment.app.DialogFragment;
 public class MainActivity extends  AppCompatActivity  { 
 	
 	private Timer _timer = new Timer();
+	
+	private String selectedFile = "";
+	private String filename = "";
+	private boolean is_intentfilter = false;
 	
 	private LinearLayout linear1;
 	private LinearLayout linear2;
@@ -58,6 +64,7 @@ public class MainActivity extends  AppCompatActivity  {
 	private ObjectAnimator two = new ObjectAnimator();
 	private ObjectAnimator three = new ObjectAnimator();
 	private ObjectAnimator four = new ObjectAnimator();
+	private SharedPreferences intentData;
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
@@ -72,9 +79,28 @@ public class MainActivity extends  AppCompatActivity  {
 		linear2 = (LinearLayout) findViewById(R.id.linear2);
 		textview1 = (TextView) findViewById(R.id.textview1);
 		imageview1 = (ImageView) findViewById(R.id.imageview1);
+		intentData = getSharedPreferences("intentData", Activity.MODE_PRIVATE);
 	}
 	
 	private void initializeLogic() {
+		try {
+			Intent intent_d = getIntent();
+			
+			String act = intent_d.getAction();
+			if (act != null && act.equals("android.intent.action.VIEW")) {
+				selectedFile = intent_d.getData().getPath();
+				filename= selectedFile.substring(selectedFile.lastIndexOf("/")+1);
+				selectedFile = selectedFile.substring(selectedFile.lastIndexOf(":")+1);
+				intentData.edit().putString("filepath", selectedFile).commit();
+				intentData.edit().putString("filename", filename).commit();
+				is_intentfilter = true;
+			}
+			else {
+				is_intentfilter = false;
+			}
+		} catch(Exception e){
+			
+		}
 		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
 		getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 		getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -107,14 +133,21 @@ public class MainActivity extends  AppCompatActivity  {
 								runOnUiThread(new Runnable() {
 									@Override
 									public void run() {
-										i.setClass(getApplicationContext(), CreateActivity.class);
-										startActivity(i);
-										finish();
+										if (is_intentfilter) {
+											i.setClass(getApplicationContext(), TextviewerActivity.class);
+											startActivity(i);
+											finish();
+										}
+										else {
+											i.setClass(getApplicationContext(), CreateActivity.class);
+											startActivity(i);
+											finish();
+										}
 									}
 								});
 							}
 						};
-						_timer.schedule(timer, (int)(850));
+						_timer.schedule(timer, (int)(840));
 					}
 				});
 			}

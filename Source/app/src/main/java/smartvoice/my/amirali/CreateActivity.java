@@ -258,29 +258,14 @@ public class CreateActivity extends  AppCompatActivity  {
 			@Override
 			public void onItemClick(AdapterView<?> _param1, View _param2, int _param3, long _param4) {
 				final int _position = _param3;
-				if (FileUtil.isFile(listmap.get((int)_position).get("file").toString())) {
-					if (listmap.get((int)_position).get("file").toString().endsWith(".txt")) {
+				path = listmap.get((int)_position).get("file").toString();
+				if (FileUtil.isExistFile(path)) {
+					if (path.endsWith(".java") || (path.endsWith(".xml") || (path.endsWith(".php") || (path.endsWith(".html") || (path.endsWith(".css") || (path.endsWith(".json") || (path.endsWith(".js") || (path.endsWith(".htm") || path.endsWith(".txt"))))))))) {
 						save.edit().putString("save", listmap.get((int)_position).get("file").toString()).commit();
 						i.setAction(Intent.ACTION_VIEW);
 						i.setClass(getApplicationContext(), VoiceActivity.class);
 						startActivity(i);
 					}
-					else {
-						path = listmap.get((int)_position).get("file").toString();
-						if (path.endsWith(".java") || (path.endsWith(".xml") || (path.endsWith(".php") || (path.endsWith(".html") || (path.endsWith(".css") || (path.endsWith(".json") || (path.endsWith(".js") || path.endsWith(".htm")))))))) {
-							save.edit().putString("save", listmap.get((int)_position).get("file").toString()).commit();
-							i.setAction(Intent.ACTION_VIEW);
-							i.setClass(getApplicationContext(), VoiceActivity.class);
-							startActivity(i);
-						}
-						else {
-							
-						}
-					}
-				}
-				else {
-					folder = listmap.get((int)_position).get("file").toString();
-					_refreshList();
 				}
 			}
 		});
@@ -290,190 +275,192 @@ public class CreateActivity extends  AppCompatActivity  {
 			public boolean onItemLongClick(AdapterView<?> _param1, View _param2, int _param3, long _param4) {
 				final int _position = _param3;
 				path_code = listmap.get((int)_position).get("file").toString();
-				final AlertDialog dialog1 = new AlertDialog.Builder(CreateActivity.this).create();
-				View inflate = getLayoutInflater().inflate(R.layout.options,null); 
-				dialog1.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-				dialog1.setView(inflate);
-				TextView title = (TextView) inflate.findViewById(R.id.title);
-				
-				TextView text1 = (TextView) inflate.findViewById(R.id.text1);
-				
-				TextView text2 = (TextView) inflate.findViewById(R.id.text2);
-				
-				TextView text3 = (TextView) inflate.findViewById(R.id.text3);
-				
-				TextView text4 = (TextView) inflate.findViewById(R.id.text4);
-				
-				TextView text5 = (TextView) inflate.findViewById(R.id.text5);
-				
-				TextView text6 = (TextView) inflate.findViewById(R.id.text6);
-				
-				LinearLayout bt1 = (LinearLayout) inflate.findViewById(R.id.bt1);
-				
-				LinearLayout bt2 = (LinearLayout) inflate.findViewById(R.id.bt2);
-				
-				LinearLayout bt3 = (LinearLayout) inflate.findViewById(R.id.bt3);
-				
-				LinearLayout bt4 = (LinearLayout) inflate.findViewById(R.id.bt4);
-				
-				LinearLayout bt5 = (LinearLayout) inflate.findViewById(R.id.bt5);
-				
-				LinearLayout bt6 = (LinearLayout) inflate.findViewById(R.id.bt6);
-				
-				ImageView img1 = (ImageView) inflate.findViewById(R.id.img1);
-				
-				ImageView img2 = (ImageView) inflate.findViewById(R.id.img2);
-				
-				ImageView img3 = (ImageView) inflate.findViewById(R.id.img3);
-				
-				ImageView img4 = (ImageView) inflate.findViewById(R.id.img4);
-				
-				ImageView img5 = (ImageView) inflate.findViewById(R.id.img5);
-				
-				ImageView img6 = (ImageView) inflate.findViewById(R.id.img6);
-				
-				LinearLayout bg = (LinearLayout) inflate.findViewById(R.id.bg);
-				title.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
-				text1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
-				text2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
-				text3.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
-				if (dark.getString("dark", "").equals("true")) {
-					_rippleRoundStroke(bg, "#212121", "#000000", 15, 0, "#000000");
-					_rippleRoundStroke(bt1, "#212121", "#BDBDBD", 17, 2, "#424242");
-					_rippleRoundStroke(bt2, "#212121", "#BDBDBD", 17, 2, "#424242");
-					_rippleRoundStroke(bt3, "#212121", "#BDBDBD", 17, 2, "#424242");
-					_rippleRoundStroke(bt4, "#212121", "#BDBDBD", 17, 2, "#424242");
-					_rippleRoundStroke(bt5, "#212121", "#BDBDBD", 17, 2, "#424242");
-					_rippleRoundStroke(bt6, "#212121", "#BDBDBD", 17, 2, "#424242");
-					title.setTextColor(0xFFFFFFFF);
-					text1.setTextColor(0xFFFFFFFF);
-					text2.setTextColor(0xFFFFFFFF);
-					text3.setTextColor(0xFFFFFFFF);
-					text4.setTextColor(0xFFFFFFFF);
-					text5.setTextColor(0xFFFFFFFF);
-					text6.setTextColor(0xFFFFFFFF);
-				}
-				else {
-					_rippleRoundStroke(bg, "#FFFFFF", "#000000", 15, 0, "#000000");
-					_rippleRoundStroke(bt1, "#FFFFFF", "#BDBDBD", 17, 2, "#EEEEEE");
-					_rippleRoundStroke(bt2, "#FFFFFF", "#BDBDBD", 17, 2, "#EEEEEE");
-					_rippleRoundStroke(bt3, "#FFFFFF", "#BDBDBD", 17, 2, "#EEEEEE");
-					_rippleRoundStroke(bt4, "#FFFFFF", "#BDBDBD", 17, 2, "#EEEEEE");
-					_rippleRoundStroke(bt5, "#FFFFFF", "#BDBDBD", 17, 2, "#EEEEEE");
-					_rippleRoundStroke(bt6, "#FFFFFF", "#BDBDBD", 17, 2, "#EEEEEE");
-					title.setTextColor(0xFF000000);
-					text1.setTextColor(0xFF000000);
-					text2.setTextColor(0xFF000000);
-					text3.setTextColor(0xFF000000);
-					text4.setTextColor(0xFF000000);
-					text5.setTextColor(0xFF000000);
-					text6.setTextColor(0xFF000000);
-				}
-				bt1.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
-						if (!FileUtil.readFile(listmap.get((int)_position).get("file").toString()).trim().equals("")) {
-							share = FileUtil.readFile(listmap.get((int)_position).get("file").toString());
-							Intent i = new Intent(android.content.Intent.ACTION_SEND);i.setType("text/plain"); i.putExtra(android.content.Intent.EXTRA_TEXT, share); startActivity(Intent.createChooser(i,"Share using"));
-						}
-						else {
-							_custom_toast("Sharing failed");
-						}
-						dialog1.dismiss();
+				if (FileUtil.isExistFile(path_code)) {
+					final AlertDialog dialog1 = new AlertDialog.Builder(CreateActivity.this).create();
+					View inflate = getLayoutInflater().inflate(R.layout.options,null); 
+					dialog1.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+					dialog1.setView(inflate);
+					TextView title = (TextView) inflate.findViewById(R.id.title);
+					
+					TextView text1 = (TextView) inflate.findViewById(R.id.text1);
+					
+					TextView text2 = (TextView) inflate.findViewById(R.id.text2);
+					
+					TextView text3 = (TextView) inflate.findViewById(R.id.text3);
+					
+					TextView text4 = (TextView) inflate.findViewById(R.id.text4);
+					
+					TextView text5 = (TextView) inflate.findViewById(R.id.text5);
+					
+					TextView text6 = (TextView) inflate.findViewById(R.id.text6);
+					
+					LinearLayout bt1 = (LinearLayout) inflate.findViewById(R.id.bt1);
+					
+					LinearLayout bt2 = (LinearLayout) inflate.findViewById(R.id.bt2);
+					
+					LinearLayout bt3 = (LinearLayout) inflate.findViewById(R.id.bt3);
+					
+					LinearLayout bt4 = (LinearLayout) inflate.findViewById(R.id.bt4);
+					
+					LinearLayout bt5 = (LinearLayout) inflate.findViewById(R.id.bt5);
+					
+					LinearLayout bt6 = (LinearLayout) inflate.findViewById(R.id.bt6);
+					
+					ImageView img1 = (ImageView) inflate.findViewById(R.id.img1);
+					
+					ImageView img2 = (ImageView) inflate.findViewById(R.id.img2);
+					
+					ImageView img3 = (ImageView) inflate.findViewById(R.id.img3);
+					
+					ImageView img4 = (ImageView) inflate.findViewById(R.id.img4);
+					
+					ImageView img5 = (ImageView) inflate.findViewById(R.id.img5);
+					
+					ImageView img6 = (ImageView) inflate.findViewById(R.id.img6);
+					
+					LinearLayout bg = (LinearLayout) inflate.findViewById(R.id.bg);
+					title.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
+					text1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
+					text2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
+					text3.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
+					if (dark.getString("dark", "").equals("true")) {
+						_rippleRoundStroke(bg, "#212121", "#000000", 15, 0, "#000000");
+						_rippleRoundStroke(bt1, "#212121", "#BDBDBD", 17, 2, "#424242");
+						_rippleRoundStroke(bt2, "#212121", "#BDBDBD", 17, 2, "#424242");
+						_rippleRoundStroke(bt3, "#212121", "#BDBDBD", 17, 2, "#424242");
+						_rippleRoundStroke(bt4, "#212121", "#BDBDBD", 17, 2, "#424242");
+						_rippleRoundStroke(bt5, "#212121", "#BDBDBD", 17, 2, "#424242");
+						_rippleRoundStroke(bt6, "#212121", "#BDBDBD", 17, 2, "#424242");
+						title.setTextColor(0xFFFFFFFF);
+						text1.setTextColor(0xFFFFFFFF);
+						text2.setTextColor(0xFFFFFFFF);
+						text3.setTextColor(0xFFFFFFFF);
+						text4.setTextColor(0xFFFFFFFF);
+						text5.setTextColor(0xFFFFFFFF);
+						text6.setTextColor(0xFFFFFFFF);
 					}
-				});
-				bt2.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
-						FileUtil.deleteFile(listmap.get((int)_position).get("file").toString());
-						_refreshList();
-						dialog1.dismiss();
+					else {
+						_rippleRoundStroke(bg, "#FFFFFF", "#000000", 15, 0, "#000000");
+						_rippleRoundStroke(bt1, "#FFFFFF", "#BDBDBD", 17, 2, "#EEEEEE");
+						_rippleRoundStroke(bt2, "#FFFFFF", "#BDBDBD", 17, 2, "#EEEEEE");
+						_rippleRoundStroke(bt3, "#FFFFFF", "#BDBDBD", 17, 2, "#EEEEEE");
+						_rippleRoundStroke(bt4, "#FFFFFF", "#BDBDBD", 17, 2, "#EEEEEE");
+						_rippleRoundStroke(bt5, "#FFFFFF", "#BDBDBD", 17, 2, "#EEEEEE");
+						_rippleRoundStroke(bt6, "#FFFFFF", "#BDBDBD", 17, 2, "#EEEEEE");
+						title.setTextColor(0xFF000000);
+						text1.setTextColor(0xFF000000);
+						text2.setTextColor(0xFF000000);
+						text3.setTextColor(0xFF000000);
+						text4.setTextColor(0xFF000000);
+						text5.setTextColor(0xFF000000);
+						text6.setTextColor(0xFF000000);
 					}
-				});
-				bt3.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
-						dialog.setTitle("Rename File");
-						LinearLayout mylayout = new LinearLayout(CreateActivity.this);
-						
-						LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-						
-						mylayout.setLayoutParams(params); mylayout.setOrientation(LinearLayout.VERTICAL);
-						
-						final EditText myedittext = new EditText(CreateActivity.this);
-						myedittext.setLayoutParams(new LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT));
-						 
-						mylayout.addView(myedittext);
-						dialog.setView(mylayout);
-						myedittext.setHintTextColor(0xFF9E9E9E);
-						myedittext.setHint("New File Name");
-						if (dark.getString("dark", "").equals("true")) {
-							myedittext.setTextColor(0xFFFFFFFF);
-						}
-						else {
-							myedittext.setTextColor(0xFF000000);
-						}
-						myedittext.setText(Uri.parse(listmap.get((int)_position).get("file").toString()).getLastPathSegment());
-						dialog.setPositiveButton("Rename", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface _dialog, int _which) {
-								if (FileUtil.isExistFile(listmap.get((int)_position).get("file").toString())) {
-									_renameTo(FileUtil.getExternalStorageDir().concat("/smart voice"), Uri.parse(listmap.get((int)_position).get("file").toString()).getLastPathSegment(), myedittext.getText().toString());
-									_refreshList();
-								}
-								else {
-									_custom_toast("not exist this file :".concat(listmap.get((int)_position).get("file").toString()));
-								}
+					bt1.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
+							if (!FileUtil.readFile(listmap.get((int)_position).get("file").toString()).trim().equals("")) {
+								share = FileUtil.readFile(listmap.get((int)_position).get("file").toString());
+								Intent i = new Intent(android.content.Intent.ACTION_SEND);i.setType("text/plain"); i.putExtra(android.content.Intent.EXTRA_TEXT, share); startActivity(Intent.createChooser(i,"Share using"));
 							}
-						});
-						dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface _dialog, int _which) {
+							else {
+								_custom_toast("Sharing failed");
+							}
+							dialog1.dismiss();
+						}
+					});
+					bt2.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
+							FileUtil.deleteFile(listmap.get((int)_position).get("file").toString());
+							_refreshList();
+							dialog1.dismiss();
+						}
+					});
+					bt3.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
+							dialog.setTitle("Rename File");
+							LinearLayout mylayout = new LinearLayout(CreateActivity.this);
+							
+							LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+							
+							mylayout.setLayoutParams(params); mylayout.setOrientation(LinearLayout.VERTICAL);
+							
+							final EditText myedittext = new EditText(CreateActivity.this);
+							myedittext.setLayoutParams(new LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT));
+							 
+							mylayout.addView(myedittext);
+							dialog.setView(mylayout);
+							myedittext.setHintTextColor(0xFF9E9E9E);
+							myedittext.setHint("New File Name");
+							if (dark.getString("dark", "").equals("true")) {
+								myedittext.setTextColor(0xFFFFFFFF);
+							}
+							else {
+								myedittext.setTextColor(0xFF000000);
+							}
+							myedittext.setText(Uri.parse(listmap.get((int)_position).get("file").toString()).getLastPathSegment());
+							dialog.setPositiveButton("Rename", new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface _dialog, int _which) {
+									if (FileUtil.isExistFile(listmap.get((int)_position).get("file").toString())) {
+										_renameTo(FileUtil.getExternalStorageDir().concat("/smart voice"), Uri.parse(listmap.get((int)_position).get("file").toString()).getLastPathSegment(), myedittext.getText().toString());
+										_refreshList();
+									}
+									else {
+										_custom_toast("not exist this file :".concat(listmap.get((int)_position).get("file").toString()));
+									}
+								}
+							});
+							dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface _dialog, int _which) {
+									
+								}
+							});
+							dialog.create().show();
+							dialog1.dismiss();
+						}
+					});
+					bt4.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
+							if (path_code.endsWith(".java") || (path_code.endsWith(".xml") || (path_code.endsWith(".php") || (path_code.endsWith(".html") || (path_code.endsWith(".css") || (path_code.endsWith(".json") || (path_code.endsWith(".js") || (path_code.endsWith(".htm") || path_code.endsWith(".txt"))))))))) {
+								save.edit().putString("save", listmap.get((int)_position).get("file").toString()).commit();
+								editor.setClass(getApplicationContext(), CodeEditorActivity.class);
+								startActivity(editor);
+							}
+							else {
 								
 							}
-						});
-						dialog.create().show();
-						dialog1.dismiss();
-					}
-				});
-				bt4.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
-						if (path_code.endsWith(".java") || (path_code.endsWith(".xml") || (path_code.endsWith(".php") || (path_code.endsWith(".html") || (path_code.endsWith(".css") || (path_code.endsWith(".json") || (path_code.endsWith(".js") || (path_code.endsWith(".htm") || path_code.endsWith(".txt"))))))))) {
-							save.edit().putString("save", listmap.get((int)_position).get("file").toString()).commit();
-							editor.setClass(getApplicationContext(), CodeEditorActivity.class);
-							startActivity(editor);
+							dialog1.dismiss();
 						}
-						else {
-							
-						}
-						dialog1.dismiss();
-					}
-				});
-				bt6.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
-						if (path_code.endsWith(".java") || (path_code.endsWith(".xml") || (path_code.endsWith(".php") || (path_code.endsWith(".html") || (path_code.endsWith(".css") || (path_code.endsWith(".json") || (path_code.endsWith(".js") || (path_code.endsWith(".htm") || path_code.endsWith(".txt"))))))))) {
-							backup_time = Calendar.getInstance();
-							backup_items = new HashMap<>();
-							backup_items.put("title", Uri.parse(listmap.get((int)_position).get("file").toString()).getLastPathSegment());
-							backup_items.put("text", FileUtil.readFile(listmap.get((int)_position).get("file").toString()));
-							backup_items.put("time", new SimpleDateFormat("dd MMMM yyyy hh:mm a").format(backup_time.getTime()));
-							if (!Backup_Data.getString("Backup_Data", "").equals("")) {
-								list_Data = new Gson().fromJson(Backup_Data.getString("Backup_Data", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+					});
+					bt6.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
+							if (path_code.endsWith(".java") || (path_code.endsWith(".xml") || (path_code.endsWith(".php") || (path_code.endsWith(".html") || (path_code.endsWith(".css") || (path_code.endsWith(".json") || (path_code.endsWith(".js") || (path_code.endsWith(".htm") || path_code.endsWith(".txt"))))))))) {
+								backup_time = Calendar.getInstance();
+								backup_items = new HashMap<>();
+								backup_items.put("title", Uri.parse(listmap.get((int)_position).get("file").toString()).getLastPathSegment());
+								backup_items.put("text", FileUtil.readFile(listmap.get((int)_position).get("file").toString()));
+								backup_items.put("time", new SimpleDateFormat("dd MMMM yyyy hh:mm a").format(backup_time.getTime()));
+								if (!Backup_Data.getString("Backup_Data", "").equals("")) {
+									list_Data = new Gson().fromJson(Backup_Data.getString("Backup_Data", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+								}
+								list_Data.add((int)0, backup_items);
+								Backup_Data.edit().putString("Backup_Data", new Gson().toJson(list_Data)).commit();
+								_custom_toast("Done");
+								backup_items.clear();
 							}
-							list_Data.add((int)0, backup_items);
-							Backup_Data.edit().putString("Backup_Data", new Gson().toJson(list_Data)).commit();
-							_custom_toast("Done");
-							backup_items.clear();
+							else {
+								_custom_toast("Not Support Your Format");
+							}
+							dialog1.dismiss();
 						}
-						else {
-							_custom_toast("Not Support Your Format");
+					});
+					bt5.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
+							copy_path.edit().putString("copy_path", listmap.get((int)_position).get("file").toString()).commit();
+							selector_mode.edit().putString("selector", "copy").commit();
+							copy.setAction(Intent.ACTION_VIEW);
+							copy.setClass(getApplicationContext(), CopyFileActivity.class);
+							startActivity(copy);
+							dialog1.dismiss();
 						}
-						dialog1.dismiss();
-					}
-				});
-				bt5.setOnClickListener(new View.OnClickListener(){ public void onClick(View v){
-						copy_path.edit().putString("copy_path", listmap.get((int)_position).get("file").toString()).commit();
-						selector_mode.edit().putString("selector", "copy").commit();
-						copy.setAction(Intent.ACTION_VIEW);
-						copy.setClass(getApplicationContext(), CopyFileActivity.class);
-						startActivity(copy);
-						dialog1.dismiss();
-					}
-				});
-				dialog1.setCancelable(true);
-				dialog1.show();
+					});
+					dialog1.setCancelable(true);
+					dialog1.show();
+				}
 				return true;
 			}
 		});
@@ -495,7 +482,7 @@ public class CreateActivity extends  AppCompatActivity  {
 				final String _tag = _param1;
 				final String _response = _param2;
 				final HashMap<String, Object> _responseHeaders = _param3;
-				try {
+				if (_isJson(_response)) {
 					map = new Gson().fromJson(_response, new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 					package_name = "smartvoice.my.amirali";
 					try {
@@ -507,8 +494,6 @@ public class CreateActivity extends  AppCompatActivity  {
 							_UpdateDialog();
 						}
 					}
-				} catch(Exception _e){
-					
 				}
 			}
 			
@@ -744,24 +729,26 @@ public class CreateActivity extends  AppCompatActivity  {
 		}
 	}
 	public void _refreshList () {
-		list.clear();
-		listmap.clear();
-		FileUtil.listDir(folder, list);
-		_SortString(list, true);
-		n = 0;
-		for(int _repeat14 = 0; _repeat14 < (int)(list.size()); _repeat14++) {
-			if (!FileUtil.isDirectory(list.get((int)(n)))) {
-				{
-					HashMap<String, Object> _item = new HashMap<>();
-					_item.put("file", list.get((int)(n)));
-					listmap.add(_item);
+		if (FileUtil.isExistFile(folder)) {
+			list.clear();
+			listmap.clear();
+			FileUtil.listDir(folder, list);
+			_SortString(list, true);
+			n = 0;
+			for(int _repeat14 = 0; _repeat14 < (int)(list.size()); _repeat14++) {
+				if (!FileUtil.isDirectory(list.get((int)(n)))) {
+					{
+						HashMap<String, Object> _item = new HashMap<>();
+						_item.put("file", list.get((int)(n)));
+						listmap.add(_item);
+					}
+					
 				}
-				
+				n++;
 			}
-			n++;
+			listview1.setAdapter(new Listview1Adapter(listmap));
+			((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
 		}
-		listview1.setAdapter(new Listview1Adapter(listmap));
-		((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
 	}
 	
 	
@@ -2858,6 +2845,21 @@ public class CreateActivity extends  AppCompatActivity  {
 		SketchUi.setColor(Color.parseColor(_color));
 		SketchUi.setCornerRadius(getDip(9));
 		_view.setBackground(SketchUi);
+	}
+	
+	
+	public boolean _isJson (final String _test) {
+		
+		    try {
+			        new JSONObject(_test);
+			    } catch (JSONException ex) {
+			        try {
+				            new JSONArray(_test);
+				        } catch (JSONException ex1) {
+				            return false;
+				        }
+			    }
+		    return true;
 	}
 	
 	

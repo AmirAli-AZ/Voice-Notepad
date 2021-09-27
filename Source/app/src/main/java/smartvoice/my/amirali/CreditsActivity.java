@@ -49,7 +49,6 @@ public class CreditsActivity extends  AppCompatActivity  {
 	private LinearLayout linear3;
 	private LinearLayout linear5;
 	private LinearLayout linear6;
-	private LinearLayout linear9;
 	private ImageView imageview1;
 	private TextView textview1;
 	private LinearLayout linear8;
@@ -63,10 +62,6 @@ public class CreditsActivity extends  AppCompatActivity  {
 	private LinearLayout linear7;
 	private TextView textview5;
 	private TextView textview6;
-	private CircleImageView circleimageview3;
-	private LinearLayout linear10;
-	private TextView textview8;
-	private TextView textview9;
 	
 	private Intent i = new Intent();
 	private SharedPreferences dark;
@@ -86,7 +81,6 @@ public class CreditsActivity extends  AppCompatActivity  {
 		linear3 = (LinearLayout) findViewById(R.id.linear3);
 		linear5 = (LinearLayout) findViewById(R.id.linear5);
 		linear6 = (LinearLayout) findViewById(R.id.linear6);
-		linear9 = (LinearLayout) findViewById(R.id.linear9);
 		imageview1 = (ImageView) findViewById(R.id.imageview1);
 		textview1 = (TextView) findViewById(R.id.textview1);
 		linear8 = (LinearLayout) findViewById(R.id.linear8);
@@ -100,10 +94,6 @@ public class CreditsActivity extends  AppCompatActivity  {
 		linear7 = (LinearLayout) findViewById(R.id.linear7);
 		textview5 = (TextView) findViewById(R.id.textview5);
 		textview6 = (TextView) findViewById(R.id.textview6);
-		circleimageview3 = (CircleImageView) findViewById(R.id.circleimageview3);
-		linear10 = (LinearLayout) findViewById(R.id.linear10);
-		textview8 = (TextView) findViewById(R.id.textview8);
-		textview9 = (TextView) findViewById(R.id.textview9);
 		dark = getSharedPreferences("dark", Activity.MODE_PRIVATE);
 		
 		textview7.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +154,6 @@ public class CreditsActivity extends  AppCompatActivity  {
 		if (dark.getString("dark", "").equals("true")) {
 			_setBackground(linear5, 25, 10, "#000000", false);
 			_setBackground(linear6, 25, 10, "#000000", false);
-			_setBackground(linear9, 25, 10, "#000000", false);
 			vscroll1.setBackgroundColor(0xFF212121);
 			linear1.setBackgroundColor(0xFF212121);
 			textview1.setTextColor(0xFFFFFFFF);
@@ -173,8 +162,6 @@ public class CreditsActivity extends  AppCompatActivity  {
 			textview4.setTextColor(0xFFFFFFFF);
 			textview5.setTextColor(0xFFFFFFFF);
 			textview6.setTextColor(0xFFFFFFFF);
-			textview8.setTextColor(0xFFFFFFFF);
-			textview9.setTextColor(0xFFFFFFFF);
 			Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#212121"));
 			View decor = getWindow().getDecorView();
 			decor.setSystemUiVisibility(0);
@@ -187,7 +174,6 @@ public class CreditsActivity extends  AppCompatActivity  {
 		else {
 			_setBackground(linear5, 25, 10, "#FFFFFF", false);
 			_setBackground(linear6, 25, 10, "#FFFFFF", false);
-			_setBackground(linear9, 25, 10, "#FFFFFF", false);
 			vscroll1.setBackgroundColor(0xFFFFFFFF);
 			linear1.setBackgroundColor(0xFFFFFFFF);
 			textview1.setTextColor(0xFF000000);
@@ -196,8 +182,6 @@ public class CreditsActivity extends  AppCompatActivity  {
 			textview4.setTextColor(0xFF000000);
 			textview5.setTextColor(0xFF000000);
 			textview6.setTextColor(0xFF000000);
-			textview8.setTextColor(0xFF000000);
-			textview9.setTextColor(0xFF000000);
 			if (Double.parseDouble(Build.VERSION.SDK) > 28) {
 				Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#F5F5F5"));
 			}
@@ -227,10 +211,8 @@ public class CreditsActivity extends  AppCompatActivity  {
 		textview2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
 		textview3.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
 		textview5.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
-		textview8.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_bold.ttf"), 0);
 		textview4.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_regular.ttf"), 0);
 		textview6.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_regular.ttf"), 0);
-		textview9.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_regular.ttf"), 0);
 	}
 	
 	

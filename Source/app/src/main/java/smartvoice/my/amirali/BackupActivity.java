@@ -60,6 +60,7 @@ public class BackupActivity extends  AppCompatActivity  {
 	
 	private ArrayList<HashMap<String, Object>> list = new ArrayList<>();
 	
+	private LinearLayout linear3;
 	private LinearLayout linear2;
 	private LinearLayout linear1;
 	private LinearLayout lin_undo;
@@ -97,6 +98,7 @@ public class BackupActivity extends  AppCompatActivity  {
 	
 	private void initialize(Bundle _savedInstanceState) {
 		
+		linear3 = (LinearLayout) findViewById(R.id.linear3);
 		linear2 = (LinearLayout) findViewById(R.id.linear2);
 		linear1 = (LinearLayout) findViewById(R.id.linear1);
 		lin_undo = (LinearLayout) findViewById(R.id.lin_undo);
@@ -294,11 +296,19 @@ public class BackupActivity extends  AppCompatActivity  {
 		tv_undo_txt.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_regular.ttf"), 0);
 		tv_undo_btn.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/google_sans_regular.ttf"), 0);
 		if (dark.getString("dark", "").equals("true")) {
+			linear3.setBackgroundColor(0xFF212121);
 			linear1.setBackgroundColor(0xFF212121);
 			linear2.setBackgroundColor(0xFF212121);
 			swiperefreshlayout1.setBackgroundColor(0xFF212121);
 			imageview1.setImageResource(R.drawable.ic_arrow_back_white);
 			textview1.setTextColor(0xFFFFFFFF);
+			int[] colorsCRNDA2 = { Color.parseColor("#212121"), Color.parseColor("#212121") }; android.graphics.drawable.GradientDrawable CRNDA2 = new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colorsCRNDA2);
+			CRNDA2.setCornerRadii(new float[]{(int)0,(int)0,(int)0,(int)0,(int)15,(int)15,(int)15,(int)15});
+			CRNDA2.setStroke((int) 0, Color.parseColor("#000000"));
+			linear2.setElevation((float) 15);
+			linear2.setBackground(CRNDA2);
+			
+			
 			Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#212121"));
 			View decor = getWindow().getDecorView();
 			decor.setSystemUiVisibility(0);
@@ -309,11 +319,19 @@ public class BackupActivity extends  AppCompatActivity  {
 			}
 		}
 		else {
+			linear3.setBackgroundColor(0xFFFFFFFF);
 			linear1.setBackgroundColor(0xFFFFFFFF);
 			linear2.setBackgroundColor(0xFFFFFFFF);
 			swiperefreshlayout1.setBackgroundColor(0xFFFFFFFF);
 			imageview1.setImageResource(R.drawable.ic_arrow_back_black);
 			textview1.setTextColor(0xFF000000);
+			int[] colorsCRNDA = { Color.parseColor("#ffffff"), Color.parseColor("#ffffff") }; android.graphics.drawable.GradientDrawable CRNDA = new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colorsCRNDA);
+			CRNDA.setCornerRadii(new float[]{(int)0,(int)0,(int)0,(int)0,(int)15,(int)15,(int)15,(int)15});
+			CRNDA.setStroke((int) 0, Color.parseColor("#000000"));
+			linear2.setElevation((float) 15);
+			linear2.setBackground(CRNDA);
+			
+			
 			if (Double.parseDouble(Build.VERSION.SDK) > 28) {
 				Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#F5F5F5"));
 			}
