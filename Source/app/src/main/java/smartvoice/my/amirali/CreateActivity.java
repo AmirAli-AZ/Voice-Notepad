@@ -697,6 +697,7 @@ public class CreateActivity extends  AppCompatActivity  {
 		update_app.startRequestNetwork(RequestNetworkController.GET, "https://raw.githubusercontent.com/AmirAli-AZ/MyGitHubServer/main/index.html", "a", _update_app_request_listener);
 		ViewConfiguration vc = ViewConfiguration.get(CreateActivity.this);
 		 mMinimunDistance = vc.getScaledTouchSlop();
+		listview1.setVerticalScrollBarEnabled(false);
 	}
 	
 	@Override

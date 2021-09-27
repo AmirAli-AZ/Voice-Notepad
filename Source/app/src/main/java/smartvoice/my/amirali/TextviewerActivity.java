@@ -159,41 +159,45 @@ public class TextviewerActivity extends  AppCompatActivity  {
 		if (Double.parseDouble(Build.VERSION.SDK) > 27) {
 			int nightModeFlags = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
 			if (nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
-				Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#212121"));
-				View decor = getWindow().getDecorView();
-				decor.setSystemUiVisibility(0);
-				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-					Window w =TextviewerActivity.this.getWindow();
-					w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-					w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); w.setStatusBarColor(0xFF212121);
-				}
-				linear1.setBackgroundColor(0xFF212121);
-				textview1.setTextColor(0xFFFFFFFF);
-				textview2.setTextColor(0xFFFFFFFF);
-				textview3.setTextColor(0xFFFFFFFF);
 				isDark = true;
 			}else{
-				if (Double.parseDouble(Build.VERSION.SDK) > 28) {
-					Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#F5F5F5"));
-				}
-				else {
-					Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#000000"));
-				}
-				View decor = getWindow().getDecorView();
-				decor.setSystemUiVisibility(0);
-				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-				getWindow().setStatusBarColor(0xFFFFFFFF);
-				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-					Window w =TextviewerActivity.this.getWindow();
-					w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-					w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); w.setStatusBarColor(0xFFFFFFFF);
-				}
-				linear1.setBackgroundColor(0xFFFFFFFF);
-				textview1.setTextColor(0xFF000000);
-				textview2.setTextColor(0xFF000000);
-				textview3.setTextColor(0xFF000000);
 				isDark = false;
 			}
+		}
+		if (isDark) {
+			Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#212121"));
+			View decor = getWindow().getDecorView();
+			decor.setSystemUiVisibility(0);
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+				Window w =TextviewerActivity.this.getWindow();
+				w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+				w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); w.setStatusBarColor(0xFF212121);
+			}
+			linear1.setBackgroundColor(0xFF212121);
+			textview1.setTextColor(0xFFFFFFFF);
+			textview2.setTextColor(0xFFFFFFFF);
+			textview3.setTextColor(0xFFFFFFFF);
+		}
+		else {
+			if (Double.parseDouble(Build.VERSION.SDK) > 28) {
+				Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#F5F5F5"));
+			}
+			else {
+				Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#000000"));
+			}
+			View decor = getWindow().getDecorView();
+			decor.setSystemUiVisibility(0);
+			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+			getWindow().setStatusBarColor(0xFFFFFFFF);
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+				Window w =TextviewerActivity.this.getWindow();
+				w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+				w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); w.setStatusBarColor(0xFFFFFFFF);
+			}
+			linear1.setBackgroundColor(0xFFFFFFFF);
+			textview1.setTextColor(0xFF000000);
+			textview2.setTextColor(0xFF000000);
+			textview3.setTextColor(0xFF000000);
 		}
 		_actionBar();
 		_overlay();

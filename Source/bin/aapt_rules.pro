@@ -121,7 +121,7 @@
 # view res/layout/mtrl_layout_snackbar_include.xml #generated:18
 -keep class com.google.android.material.snackbar.SnackbarContentLayout { <init>(...); }
 
-# view res/layout/credits.xml #generated:129
+# view res/layout/credits.xml #generated:130
 # view res/layout/credits.xml #generated:83
 -keep class de.hdodenhof.circleimageview.CircleImageView { <init>(...); }
 

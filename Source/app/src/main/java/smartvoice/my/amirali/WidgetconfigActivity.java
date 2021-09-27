@@ -126,54 +126,58 @@ public class WidgetconfigActivity extends  AppCompatActivity  {
 		if (Double.parseDouble(Build.VERSION.SDK) > 27) {
 			int nightModeFlags = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
 			if (nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
-				int[] colorsCRNDA2 = { Color.parseColor("#212121"), Color.parseColor("#212121") }; android.graphics.drawable.GradientDrawable CRNDA2 = new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colorsCRNDA2);
-				CRNDA2.setCornerRadii(new float[]{(int)0,(int)0,(int)0,(int)0,(int)15,(int)15,(int)15,(int)15});
-				CRNDA2.setStroke((int) 0, Color.parseColor("#000000"));
-				linear1.setElevation((float) 15);
-				linear1.setBackground(CRNDA2);
-				linear2.setBackgroundColor(0xFF212121);
-				vscroll2.setBackgroundColor(0xFF212121);
-				linear3.setBackgroundColor(0xFF212121);
-				imageview2.setImageResource(R.drawable.ic_more_vert_white);
-				textview1.setTextColor(0xFFFFFFFF);
-				edittext1.setTextColor(0xFFFFFFFF);
-				Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#212121"));
-				View decor = getWindow().getDecorView();
-				decor.setSystemUiVisibility(0);
-				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-					Window w =WidgetconfigActivity.this.getWindow();
-					w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-					w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); w.setStatusBarColor(0xFF212121);
-				}
 				isDark = true;
 			}else{
-				int[] colorsCRNDA = { Color.parseColor("#ffffff"), Color.parseColor("#ffffff") }; android.graphics.drawable.GradientDrawable CRNDA = new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colorsCRNDA);
-				CRNDA.setCornerRadii(new float[]{(int)0,(int)0,(int)0,(int)0,(int)15,(int)15,(int)15,(int)15});
-				CRNDA.setStroke((int) 0, Color.parseColor("#000000"));
-				linear1.setElevation((float) 15);
-				linear1.setBackground(CRNDA);
-				linear2.setBackgroundColor(0xFFFFFFFF);
-				vscroll2.setBackgroundColor(0xFFFFFFFF);
-				linear3.setBackgroundColor(0xFFFFFFFF);
-				imageview2.setImageResource(R.drawable.ic_more_vert_black);
-				textview1.setTextColor(0xFF000000);
-				edittext1.setTextColor(0xFF000000);
-				if (Double.parseDouble(Build.VERSION.SDK) > 28) {
-					Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#F5F5F5"));
-				}
-				else {
-					Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#000000"));
-				}
-				View decor = getWindow().getDecorView();
-				decor.setSystemUiVisibility(0);
-				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-				getWindow().setStatusBarColor(0xFFFFFFFF);
-				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
-					Window w =WidgetconfigActivity.this.getWindow();
-					w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-					w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); w.setStatusBarColor(0xFFFFFFFF);
-				}
 				isDark = false;
+			}
+		}
+		if (isDark) {
+			int[] colorsCRNDA2 = { Color.parseColor("#212121"), Color.parseColor("#212121") }; android.graphics.drawable.GradientDrawable CRNDA2 = new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colorsCRNDA2);
+			CRNDA2.setCornerRadii(new float[]{(int)0,(int)0,(int)0,(int)0,(int)15,(int)15,(int)15,(int)15});
+			CRNDA2.setStroke((int) 0, Color.parseColor("#000000"));
+			linear1.setElevation((float) 15);
+			linear1.setBackground(CRNDA2);
+			linear2.setBackgroundColor(0xFF212121);
+			vscroll2.setBackgroundColor(0xFF212121);
+			linear3.setBackgroundColor(0xFF212121);
+			imageview2.setImageResource(R.drawable.ic_more_vert_white);
+			textview1.setTextColor(0xFFFFFFFF);
+			edittext1.setTextColor(0xFFFFFFFF);
+			Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#212121"));
+			View decor = getWindow().getDecorView();
+			decor.setSystemUiVisibility(0);
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+				Window w =WidgetconfigActivity.this.getWindow();
+				w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+				w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); w.setStatusBarColor(0xFF212121);
+			}
+		}
+		else {
+			int[] colorsCRNDA = { Color.parseColor("#ffffff"), Color.parseColor("#ffffff") }; android.graphics.drawable.GradientDrawable CRNDA = new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.TOP_BOTTOM, colorsCRNDA);
+			CRNDA.setCornerRadii(new float[]{(int)0,(int)0,(int)0,(int)0,(int)15,(int)15,(int)15,(int)15});
+			CRNDA.setStroke((int) 0, Color.parseColor("#000000"));
+			linear1.setElevation((float) 15);
+			linear1.setBackground(CRNDA);
+			linear2.setBackgroundColor(0xFFFFFFFF);
+			vscroll2.setBackgroundColor(0xFFFFFFFF);
+			linear3.setBackgroundColor(0xFFFFFFFF);
+			imageview2.setImageResource(R.drawable.ic_more_vert_black);
+			textview1.setTextColor(0xFF000000);
+			edittext1.setTextColor(0xFF000000);
+			if (Double.parseDouble(Build.VERSION.SDK) > 28) {
+				Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#F5F5F5"));
+			}
+			else {
+				Window window = this.getWindow();window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS); window.setNavigationBarColor(Color.parseColor("#000000"));
+			}
+			View decor = getWindow().getDecorView();
+			decor.setSystemUiVisibility(0);
+			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+			getWindow().setStatusBarColor(0xFFFFFFFF);
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+				Window w =WidgetconfigActivity.this.getWindow();
+				w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+				w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS); w.setStatusBarColor(0xFFFFFFFF);
 			}
 		}
 		_font();
